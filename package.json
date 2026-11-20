@@ -1,11 +1,11 @@
 {
   "name": "backlog-spec",
   "private": true,
-  "description": "Checks for the Open Backlog spec: the JSON Schema against the example backlogs.",
+  "description": "Checks for the Open Backlog spec: the JSON Schema against the example backlogs and the whitepaper.",
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "test": "node schema/test/check-examples.mjs"
+    "test": "node schema/test/check-examples.mjs && node schema/test/check-whitepaper.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

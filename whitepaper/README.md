@@ -10,8 +10,9 @@ reasoning, and the tools built for it. One Markdown file per section, in order:
 | `18-appendices.md` | Appendices |
 
 `metadata.yml` holds the title, subtitle, author, version, date and license; `references.bib`
-holds every source the paper cites, as `[@key]`. A section not written yet is a heading and a
-TODO line saying what goes there.
+holds every source the paper cites, as `[@key]`; they are listed in appendix D. Every section
+is written (2.1.1–2.1.8). Appendix B copies the JSON Schema in full, and `npm test` fails if
+that copy ever differs from `schema/0.1/`.
 
 `figures/` holds the diagrams the paper embeds, copied from backlog-art's `diagrams/` by
 `script/sync-art.sh`; change them there, never here.

@@ -1,7 +1,8 @@
 name: Check
 
 # On every push and pull request: the JSON Schema must agree with the example backlogs
-# (schema/test/check-examples.mjs). A change to one without the other fails here.
+# (schema/test/check-examples.mjs) and with the whitepaper's appendix B
+# (schema/test/check-whitepaper.mjs). A change to one without the other fails here.
 on:
   push:
   pull_request:
