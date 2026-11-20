@@ -1,0 +1,5 @@
+spec: 0.1
+name: portfolio
+backlogs:
+  notes: git@github.com:example/notes.git
+  photos: git@github.com:example/photos.git

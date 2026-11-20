@@ -1,0 +1,8 @@
+spec: 0.1
+name: shop
+estimate: points
+done-folders: month
+repos:
+  shop-api: git@github.com:example/shop-api.git
+  shop-web: git@github.com:example/shop-web.git
+  shop-ios: git@github.com:example/shop-ios.git

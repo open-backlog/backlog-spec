@@ -17,6 +17,13 @@ change makes an existing valid backlog invalid or changes what it means; see
   [read-as-text]; optional fields `rank`, `sprint`, `estimate`,
   `assignee`, `release`, `due`, `repo` with their formats [field-format], [sprint-exists];
   no email addresses [no-email]; unknown fields are kept by tools [keep-unknown].
+- Added: examples: valid T1, T3 and T4 backlogs, one invalid backlog per file rule, and
+  tool checks for [read-as-text], [keep-unknown] and [missing-clone].
+- Added: `config.yml` with `spec` and `name` required, `estimate`, `done-folders`, `repos`,
+  `backlogs` optional [config-required]; the tiers T1–T4, none of which changes an item file;
+  `repo` names listed repositories, one or a list [repo-listed]; other repositories and
+  backlogs are local clones [local-only], and a missing one is a warning [missing-clone];
+  [read-as-text] covers `spec`.
 - Added: the layout, with `config.yml` required [config-file] and each item in its type's
   folder [item-folder]; status is the folder (`todo`, `doing`, `done`) and never stored
   [no-stored-status]; only story-level items move; progress, order, `done/` subfolders and

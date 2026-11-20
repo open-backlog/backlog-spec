@@ -17,8 +17,7 @@ it the same way.
 6. [Sprints and people](#6-sprints-and-people)
 7. [IDs and filenames](#7-ids-and-filenames)
 8. [Layout and lifecycle](#8-layout-and-lifecycle)
-
-Not written yet in this draft: configuration and scale.
+9. [Configuration and scale](#9-configuration-and-scale)
 
 ## 1. Conventions
 
@@ -153,8 +152,8 @@ next line `---`. Everything after it is the body ([section 5](#5-the-body)).
 An ID looks like a number but is text: `2.10`, the tenth feature of epic `2`, is not `2.1`.
 YAML reads an unquoted `2.10` as the number 2.1, so tools must not let it.
 
-- **[read-as-text]** A tool MUST read `id`, `parent`, `sprint` and `release` as the text
-  written in the file, never as numbers.
+- **[read-as-text]** A tool MUST read `id`, `parent`, `sprint` and `release`, and `spec` in
+  `config.yml`, as the text written in the file, never as numbers.
 
 Writers MAY quote these values (`id: "2.10"`); tools SHOULD write them unquoted, as people
 do.
@@ -172,7 +171,7 @@ without them.
 | `assignee` | A handle, such as `ana-silva` | Who is doing it ([section 6](#6-sprints-and-people)). |
 | `release` | Text, such as `0.1.0` | The release the item ships in. |
 | `due` | A date, `YYYY-MM-DD` | When it is due. |
-| `repo` | A repository name, such as `backlog-cli` | The repository the work happens in, when a backlog serves several. |
+| `repo` | A repository name, such as `backlog-cli`, or a list of them | The repository the work happens in, when a backlog serves several ([section 9](#9-configuration-and-scale)). |
 
 A *handle* is a short name for a person: lowercase letters, digits, `-`, `_` and `.`,
 starting with a letter or digit, such as `ana-silva` or `jo-smith`.
@@ -492,3 +491,88 @@ a tool can show a pruned item from its last commit, and its ID stays used for go
 - **[prune-children]** An item MUST NOT be pruned while items that name it as `parent` remain.
 
 So prune finished stories first, and a feature or epic only after everything under it.
+
+## 9. Configuration and scale
+
+### config.yml
+
+`config.yml` sits at the top of the backlog. Two lines are enough:
+
+```yaml
+spec: 0.1
+name: my-app
+```
+
+| Key | Required | Format | Meaning |
+|---|---|---|---|
+| `spec` | yes | `MAJOR.MINOR`, such as `0.1` | The version of this specification the backlog follows. |
+| `name` | yes | lowercase letters, digits and dashes, such as `my-app` | The backlog's name: other backlogs refer to its items as `my-app/2.3.4`. |
+| `estimate` | no | `points`, `hours` or `days` | The unit of every `estimate`. Points if absent. |
+| `done-folders` | no | `month` | Tools file finished items into `stories/done/YYYY-MM/`. Directly in `done/` if absent. |
+| `repos` | no | repository name → clone URL | The repositories this backlog's work happens in (T3). |
+| `backlogs` | no | backlog name → clone URL | The other backlogs this one gathers (T4). |
+
+- **[config-required]** `config.yml` MUST have `spec` and `name`, and every key in the table
+  MUST have the format it gives.
+
+A tool MUST keep keys it does not know, as for item fields ([keep-unknown]).
+
+### The four tiers
+
+A backlog grows through four tiers. Each one adds to the last; none changes an item file.
+
+| Tier | What it is | What changes |
+|---|---|---|
+| **T1** | A backlog inside the code repository it plans: `my-app/backlog/` | Two lines of `config.yml`. |
+| **T2** | A backlog in a repository of its own: `my-app-backlog/backlog/` | Nothing but where the folder lives: move `backlog/` into the new repository. |
+| **T3** | One backlog for an application built in several repositories | `repos:` in `config.yml`, and a `repo` field on items that need one. |
+| **T4** | A portfolio that gathers several backlogs | `backlogs:` in `config.yml`; their names prefix their items' IDs. |
+
+A T3 backlog's configuration:
+
+```yaml
+spec: 0.1
+name: open-backlog
+repos:
+  backlog-cli: git@github.com:open-backlog/backlog-cli.git
+  backlog-board: git@github.com:open-backlog/backlog-board.git
+```
+
+and a story that names one, or a list for work that spans two:
+
+```yaml
+repo: backlog-cli
+```
+
+```yaml
+repo: [backlog-cli, backlog-board]
+```
+
+- **[repo-listed]** Each name in an item's `repo` MUST be a key of `repos:` in `config.yml`.
+
+A T4 portfolio lists its backlogs the same way, and refers to their items with the backlog's
+name in front, such as `notes/2.3.4`:
+
+```yaml
+spec: 0.1
+name: portfolio
+backlogs:
+  notes: git@github.com:example/notes-backlog.git
+  photos: git@github.com:example/photos-backlog.git
+```
+
+A key in `backlogs:` SHOULD be that backlog's own `name`.
+
+### Other repositories are local clones
+
+A backlog never fetches anything. A tool finds each repository in `repos:` and each backlog in
+`backlogs:` as a clone on the same disk: by default a folder with the key's name beside the
+repository that holds this backlog, such as `../backlog-cli/`, with a listed backlog's files in
+its `backlog/` folder. The clone URL tells people where to clone from; tools do not use it.
+
+- **[local-only]** A tool MUST NOT need network access or git submodules to read a backlog.
+- **[missing-clone]** When a listed repository or backlog has no local clone, a tool MUST warn
+  and carry on, and MUST NOT fail.
+
+So a T3 or T4 backlog works with whatever is cloned: everything about this backlog is always
+there, and what other clones add is shown when they are present.
