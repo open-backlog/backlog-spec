@@ -31,7 +31,7 @@ has been tried on a real or example backlog.
 - Update or add an example in `examples/` that shows the rule, and an invalid example if
   the rule can be broken.
 - If the rule touches front matter or `config.yml`, update the JSON Schema in `schema/` in
-  the same pull request.
+  the same pull request. `npm test` (and CI) checks that the schema and the examples agree.
 - [VERSIONING.md](VERSIONING.md) decides which version number the change ships in.
 
 ## Licenses

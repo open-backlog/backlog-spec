@@ -1,0 +1,14 @@
+{
+  "name": "backlog-spec",
+  "private": true,
+  "description": "Checks for the Open Backlog spec: the JSON Schema against the example backlogs.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "test": "node schema/test/check-examples.mjs"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "yaml": "^2.6.1"
+  }
+}

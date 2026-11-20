@@ -17,6 +17,8 @@ change makes an existing valid backlog invalid or changes what it means; see
   [read-as-text]; optional fields `rank`, `sprint`, `estimate`,
   `assignee`, `release`, `due`, `repo` with their formats [field-format], [sprint-exists];
   no email addresses [no-email]; unknown fields are kept by tools [keep-unknown].
+- Added: JSON Schema (draft-07) for item front matter and `config.yml` at
+  `https://openbacklog.org/schema/0.1/`, checked against the examples on every push.
 - Added: examples: valid T1, T3 and T4 backlogs, one invalid backlog per file rule, and
   tool checks for [read-as-text], [keep-unknown] and [missing-clone].
 - Added: `config.yml` with `spec` and `name` required, `estimate`, `done-folders`, `repos`,

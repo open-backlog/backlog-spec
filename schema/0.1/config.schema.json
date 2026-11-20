@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://openbacklog.org/schema/0.1/config.schema.json",
+  "title": "Open Backlog 0.1 config.yml",
+  "description": "A backlog's config.yml [config-required]. See spec/README.md, section 9.",
+  "type": "object",
+  "required": ["spec", "name"],
+  "properties": {
+    "spec": {
+      "description": "The spec version the backlog follows, MAJOR.MINOR. Text, not a number [read-as-text].",
+      "type": ["string", "number"],
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "name": {
+      "description": "The backlog's name, used by other backlogs as name/2.3.4.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "estimate": { "description": "The unit of every estimate. Points if absent.", "enum": ["points", "hours", "days"] },
+    "done-folders": { "description": "File finished items into stories/done/YYYY-MM/.", "const": "month" },
+    "repos": {
+      "description": "Repository name to clone URL (T3).",
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    },
+    "backlogs": {
+      "description": "Backlog name to clone URL (T4).",
+      "type": "object",
+      "additionalProperties": { "type": "string" }
+    }
+  }
+}
