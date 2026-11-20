@@ -27,8 +27,8 @@ then a commit.
 
 ## Status
 
-**Draft.** Spec 0.1 is being written; nothing here is released yet. See
-[VERSIONING.md](VERSIONING.md) for what a release is.
+**Draft.** Spec 0.1 is being written; nothing is released yet ([VERSIONING.md](VERSIONING.md)).
+Read it at [spec/](spec/) or https://openbacklog.org/spec.
 
 ## What's in this repository
 
@@ -39,25 +39,22 @@ then a commit.
 | [examples/](examples/) | Example backlogs, valid and deliberately invalid |
 | [schema/](schema/) | JSON Schema for item front matter and `config.yml` |
 
-The tools that implement the convention (the `ob` command line and the local board) live
-in their own repositories. The site is https://openbacklog.org.
+The `ob` command line and the local board live in their own repositories.
 
 ## Publishing to openbacklog.org
 
-The site (`backlog-ui`, beside this repo) renders `spec/README.md` and serves `schema/`. To hand
-it a change, run `php script/buildmerge-ui.php` here; it replaces `backlog-ui/src/content/backlog-spec/`.
-Uncommitted changes can be tried in backlog-ui's `ng serve`, but only committed ones can be
-deployed. backlog-ui's README has the rest.
+`php script/buildmerge-ui.php` hands the spec and schema to the site's source, `backlog-ui`
+(beside this repo). Uncommitted changes can be tried in its `ng serve`; only committed ones
+can be deployed. backlog-ui's README has the rest.
 
 ## License
 
 - The specification and the whitepaper (`spec/`, `whitepaper/`) and every other piece of
   prose in this repository: [CC-BY-4.0](LICENSE). Share and adapt them, with attribution.
 - Code and machine-readable files (`schema/`, scripts, build files) and the `examples/`
-  backlogs: [MIT](LICENSE-CODE), so you can copy them into your own projects freely.
+  backlogs: [MIT](LICENSE-CODE), so they can be copied into any project.
 
 ## Contributing
 
-Open an issue first, then a pull request. [CONTRIBUTING.md](CONTRIBUTING.md) explains how
-changes are proposed and decided, and [CHANGELOG.md](CHANGELOG.md) records every change to a
-normative rule.
+Open an issue, then a pull request: [CONTRIBUTING.md](CONTRIBUTING.md). Every rule change is
+in [CHANGELOG.md](CHANGELOG.md).

@@ -1,33 +1,23 @@
 # schema/
 
-JSON Schema for Open Backlog files, one folder per spec version. Use it to check files
-without any Open Backlog tool, and to get autocomplete and inline errors in an editor.
+JSON Schema for Open Backlog files, one folder per spec version: for checking files without
+any Open Backlog tool, and for autocomplete and inline errors in an editor.
 
 | File | Checks | Address |
 |---|---|---|
 | [0.1/item.schema.json](0.1/item.schema.json) | the front matter of a capability, epic, feature or story-level file | `https://openbacklog.org/schema/0.1/item.schema.json` |
 | [0.1/config.schema.json](0.1/config.schema.json) | `config.yml` | `https://openbacklog.org/schema/0.1/config.schema.json` |
 
-The schemas are JSON Schema draft-07, the version editors and linters support best. A
-released version's schema never changes ([VERSIONING.md](../VERSIONING.md)).
+They are JSON Schema draft-07, which editors support best, and never change after release.
 
-## What the schema checks, and what it can't
+## What it checks
 
-A schema sees one file at a time. It checks the rules a single file can break:
+A schema sees one file at a time, so it checks the rules one file can break: [front-matter],
+[fields], [id-form], [parent] (by the form of the parent's ID), [not-stored], [no-email] and
+[config]. The rest need the whole backlog and are for a validator such as `ob validate`.
 
-- [front-matter], [type-known], [required-fields], [title-one-line], [field-format],
-  [id-form], [no-children], [no-stored-status], [no-email] (in fields), [config-required];
-- the *form* of a `parent` for each type, which catches [parent-feature], [parent-epic],
-  [parent-capability] and [parent-none] when the parent is the wrong kind of ID.
-
-Rules that need more than one file (whether a parent exists, unique IDs, filenames and
-folders, sprints, people, `repo` against `repos:`, unplanned-work months, comment lines) are
-left to a validator such as `ob validate`.
-
-**IDs are text.** YAML reads an unquoted `2.10` as the number 2.1, so the schema accepts a
-number for `id`, `parent`, `release` and `spec`: otherwise every hand-written `id: 2.3` would
-show an error in an editor. A tool reads them as written text ([read-as-text]); the tests here
-do.
+The schema accepts a number for `id`, `parent`, `release` and `spec`, because editors read
+`2.3` as a number; tools read them as text ([read-as-text]).
 
 ## In an editor
 
@@ -90,6 +80,5 @@ or a `status:` field ("Must NOT be valid"). The same check runs in a terminal or
 
 ## Tests
 
-`npm test` (run by CI on every push) validates every file in [examples/](../examples/)
-against the schema, and fails when the two disagree: a valid example the schema rejects, an
-invalid example it should catch but doesn't, or one it catches that only a validator should.
+`npm test`, run by CI on every push, checks every file in [examples/](../examples/) against the
+schema and fails if they disagree.

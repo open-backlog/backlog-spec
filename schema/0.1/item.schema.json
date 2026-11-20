@@ -11,11 +11,11 @@
       "type": ["string", "number"]
     },
     "type": {
-      "description": "One of the seven types [type-known].",
+      "description": "One of the seven types [fields].",
       "enum": ["capability", "epic", "feature", "story", "bug", "spike", "task"]
     },
     "title": {
-      "description": "A short name, on one line [title-one-line].",
+      "description": "A short name, on one line [fields].",
       "type": "string",
       "pattern": "^[^\\n]*\\S[^\\n]*$"
     },
@@ -27,7 +27,7 @@
     "sprint": { "description": "The name of a file in sprints/, such as 2026-S24.", "type": "string" },
     "estimate": { "description": "The size of the work, in the backlog's unit.", "type": "number", "minimum": 0 },
     "assignee": {
-      "description": "A handle: lowercase letters, digits, -, _ and . [no-email].",
+      "description": "A handle: lowercase letters, digits, -, _ and . [fields].",
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9._-]*$"
     },
@@ -40,9 +40,9 @@
         { "type": "array", "items": { "type": "string", "minLength": 1 }, "minItems": 1 }
       ]
     },
-    "children": { "description": "Never listed: children are worked out [no-children].", "not": {} },
-    "status": { "description": "Never stored: the folder is the status [no-stored-status].", "not": {} },
-    "progress": { "description": "Never stored: progress is worked out [no-stored-status].", "not": {} }
+    "children": { "description": "Never listed: children are worked out [not-stored].", "not": {} },
+    "status": { "description": "Never stored: the folder is the status [not-stored].", "not": {} },
+    "progress": { "description": "Never stored: progress is worked out [not-stored].", "not": {} }
   },
   "additionalProperties": {
     "description": "Fields of a backlog's own are allowed and kept by tools [keep-unknown], but hold no email address [no-email].",

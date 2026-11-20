@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://openbacklog.org/schema/0.1/config.schema.json",
   "title": "Open Backlog 0.1 config.yml",
-  "description": "A backlog's config.yml [config-required]. See spec/README.md, section 9.",
+  "description": "A backlog's config.yml [config]. See spec/README.md, section 5.",
   "type": "object",
   "required": ["spec", "name"],
   "properties": {

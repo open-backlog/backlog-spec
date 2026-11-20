@@ -1,6 +1,6 @@
 # Invalid: [item-folder]
 
-The story is in a subfolder of `stories/todo/`; only `done/` may have subfolders.
+- The story is in a subfolder of `stories/todo/`; only `done/` has subfolders.
 
-Everything else is valid, so a validator should report [item-folder] and nothing else. The rule is
-in [section 8](../../../spec/README.md#8-layout-and-lifecycle) of the spec.
+Everything else is valid, so a validator reports [item-folder] and nothing else. See the
+[spec](../../../spec/README.md#4-folders-and-status).

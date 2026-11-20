@@ -1,6 +1,6 @@
 # Invalid: [id-unique]
 
-Two stories have the ID `1.1.1`.
+- Two stories have the ID `1.1.1`.
 
-Everything else is valid, so a validator should report [id-unique] and nothing else. The rule is
-in [section 7](../../../spec/README.md#7-ids-and-filenames) of the spec.
+Everything else is valid, so a validator reports [id-unique] and nothing else. See the
+[spec](../../../spec/README.md#2-items).

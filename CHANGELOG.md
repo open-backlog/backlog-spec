@@ -1,41 +1,42 @@
 # Changelog
 
-Every change to a normative rule in `spec/` is listed here, newest first. A **breaking**
-change makes an existing valid backlog invalid or changes what it means; see
-[VERSIONING.md](VERSIONING.md).
+Every change to a rule in `spec/`, newest first. A **breaking** change makes a valid backlog
+invalid or changes what it means ([VERSIONING.md](VERSIONING.md)).
 
 ## Unreleased (0.1, draft)
 
-- Added: the item types `capability`, `epic`, `feature`, and the story-level `story`,
-  `bug`, `spike`, `task` [type-known].
-- Added: the hierarchy, linked by `parent` pointing up only: story-level → feature
-  [parent-feature], feature → epic [parent-epic], epic → capability, optional
-  [parent-capability], capability → none [parent-none]; a parent must exist
-  [parent-exists]; children are never listed [no-children].
-- Added: front matter [front-matter]; required fields `id`, `type`, `title`, `parent`
-  [required-fields], [title-one-line]; IDs and similar values are text, not numbers
-  [read-as-text]; optional fields `rank`, `sprint`, `estimate`,
-  `assignee`, `release`, `due`, `repo` with their formats [field-format], [sprint-exists];
-  no email addresses [no-email]; unknown fields are kept by tools [keep-unknown].
-- Added: JSON Schema (draft-07) for item front matter and `config.yml` at
-  `https://openbacklog.org/schema/0.1/`, checked against the examples on every push.
-- Added: examples: valid T1, T3 and T4 backlogs, one invalid backlog per file rule, and
-  tool checks for [read-as-text], [keep-unknown] and [missing-clone].
-- Added: `config.yml` with `spec` and `name` required, `estimate`, `done-folders`, `repos`,
-  `backlogs` optional [config-required]; the tiers T1–T4, none of which changes an item file;
-  `repo` names listed repositories, one or a list [repo-listed]; other repositories and
-  backlogs are local clones [local-only], and a missing one is a warning [missing-clone];
-  [read-as-text] covers `spec`.
-- Added: the layout, with `config.yml` required [config-file] and each item in its type's
-  folder [item-folder]; status is the folder (`todo`, `doing`, `done`) and never stored
-  [no-stored-status]; only story-level items move; progress, order, `done/` subfolders and
-  pruning [prune-children].
-- Added: IDs by depth (epic `2`, feature `2.3`, story-level `2.3.4`, capability `C1`)
-  [id-form], unique [id-unique], numbered in build order [id-new], never changed or reused
-  [id-forever]; filenames `<id>-<slug>.md` [filename], [slug-form]; references by ID and
-  across backlogs as `name/2.3.4`; epic `0` with monthly features for unplanned work
-  [epic-zero]; duplicates from parallel branches renumbered, later one first.
-- Added: the body, the recommended story shape and comment lines [comment-line].
-- Added: sprint files [sprint-dates], [sprint-no-list] and `people.yml` [people-format],
-  [people-no-email].
-- Added: the repository, its licenses, the contributing guide and the versioning policy.
+The first draft of the rules: items and their parents, IDs, files and fields, folders and
+status, configuration and the four tiers, and the rules for tools. Twenty rules, with an
+example of each broken in `examples/invalid/`, a JSON Schema in `schema/`, and the site at
+https://openbacklog.org/spec.
+
+### Simplified (1.4.1)
+
+The draft was rewritten in six sections, and its 35 rules merged into 20. Nothing a backlog
+can or must do changed; only the names and the grouping did:
+
+| Before | Now |
+|---|---|
+| parent-feature, parent-epic, parent-capability, parent-none | parent |
+| parent-exists | parent-exists |
+| type-known, required-fields, title-one-line, field-format | fields |
+| front-matter | front-matter |
+| no-children, no-stored-status, sprint-no-list | not-stored |
+| no-email, people-no-email | no-email |
+| sprint-exists, sprint-dates | sprints |
+| people-format | people |
+| comment-line | comment-line |
+| id-form | id-form |
+| id-unique | id-unique |
+| id-new, id-forever | id-numbers |
+| filename, slug-form | filename |
+| epic-zero | epic-zero (month order now follows from id-numbers) |
+| config-file, config-required | config |
+| item-folder | item-folder |
+| repo-listed | repo-listed |
+| prune-children | a sentence: pruning a parent first breaks parent-exists |
+| read-as-text | read-as-text |
+| keep-unknown | keep-unknown (now also unknown config keys and the body) |
+| local-only, missing-clone | local-clones |
+
+One clarification: a key in `backlogs:` is the name used for that backlog's items.

@@ -15,9 +15,7 @@ import { parseDocument } from 'yaml';
 const root = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 const examples = join(root, 'examples');
 const SCHEMA_RULES = new Set([
-  'front-matter', 'type-known', 'required-fields', 'title-one-line', 'field-format', 'id-form',
-  'parent-feature', 'parent-epic', 'parent-capability', 'parent-none', 'no-children',
-  'no-stored-status', 'no-email', 'config-required',
+  'front-matter', 'fields', 'id-form', 'parent', 'not-stored', 'no-email', 'config',
 ]);
 // Values the spec says to read as written text, never as numbers [read-as-text].
 const AS_TEXT = { item: ['id', 'parent', 'sprint', 'release'], config: ['spec'] };
