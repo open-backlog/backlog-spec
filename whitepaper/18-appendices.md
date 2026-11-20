@@ -2,9 +2,8 @@
 
 ## A. Field reference
 
-A summary of every field and key in version 0.1. The specification's sections 3 and 5 are the
-definition [@openbacklog-spec]; where this table and the specification differ, the specification
-wins. The specification's MUST, MUST NOT, SHOULD and MAY are used as in BCP 14
+Every field and key in version 0.1, from sections 3 and 5 of the specification
+[@openbacklog-spec], which wins if they differ. Its MUST, SHOULD and MAY are used as in BCP 14
 [@rfc2119; @rfc8174].
 
 **Item front matter**
@@ -44,10 +43,9 @@ wins. The specification's MUST, MUST NOT, SHOULD and MAY are used as in BCP 14
 
 ## B. The JSON Schema
 
-The schema checks the rules a single file can break [@jsonschema07]. It is published at
-`https://openbacklog.org/schema/0.1/` and kept in the specification's repository in
-`schema/0.1/`; the copies below are checked against those files on every push. Rules that span
-files (a parent exists, IDs are unique, sprints and repositories are listed) need a validator.
+The schema checks the rules one file can break [@jsonschema07]; rules across files need a
+validator. It is published at `https://openbacklog.org/schema/0.1/`, and these copies are checked
+against the specification's `schema/0.1/` on every push.
 
 **`item.schema.json`**, for an item's front matter:
 
@@ -184,32 +182,20 @@ files (a parent exists, IDs are unique, sprints and repositories are listed) nee
 
 ## C. Glossary
 
-- **Backlog**: a folder, usually `backlog/`, holding `config.yml` and item files; valid when it
-  breaks none of the specification's rules.
-- **Item**: one file in a backlog: a capability, epic, feature or story-level item.
-- **Story-level item**: a `story`, `bug`, `spike` or `task`: the work itself, the only items with
-  a status.
-- **Capability**: an optional lasting ability of the product, above epics.
-- **Epic**: a large goal, delivered by its features. Epic `0` holds unplanned work.
-- **Feature**: something a user can do or see, delivered by its stories.
-- **Parent**: the one item an item points up at, in its `parent` field.
-- **Children**: the items whose `parent` is an item's ID; worked out, never written.
+- **Backlog**: a folder, usually `backlog/`, with `config.yml` and item files.
+- **Item**: one file: a capability, epic, feature or story-level item.
+- **Story-level item**: a story, bug, spike or task; the only items with a status.
 - **Status**: the folder a story-level item is in: `todo`, `doing` or `done`.
+- **Parent**: the item an item points up at. **Children** are worked out, never written.
 - **Progress**: the share of story-level items under an item that are done; worked out.
-- **ID**: an item's number, whose parts show where it was filed (`2.3.4`); never changes.
-- **Full ID**: a backlog's name, a slash and an ID (`notes/1.1.1`), used from other backlogs.
-- **Slug**: the words after the ID in a filename (`ob-move` in `2.3.4-ob-move.md`); may change.
-- **Front matter**: the YAML mapping between two `---` lines at the top of an item file.
-- **Handle**: a short lowercase name for a person (`jo-smith`), used instead of an email address.
-- **Rank**: an optional number that orders items within a folder.
-- **Sprint**: an optional time-box, a file in `sprints/` that items name.
-- **Tier**: T1 to T4, how far a backlog reaches: one repository, its own repository, an
-  application's repositories, a portfolio of backlogs.
-- **Local clone**: a repository or backlog checked out beside the one holding this backlog,
-  where tools look for it.
-- **Pruning**: removing old finished items with `git rm`; git history keeps them.
-- **Solution document**: an optional design document beside the backlog, holding the design and a
-  master plan; a practice, not a rule.
+- **ID**: an item's number, such as `2.3.4`; never changes. A **full ID** adds the backlog's name:
+  `notes/1.1.1`.
+- **Slug**: the words after the ID in a filename; may change.
+- **Front matter**: the YAML between two `---` lines at the top of an item file.
+- **Handle**: a short lowercase name for a person, used instead of an email address.
+- **Tier**: T1 to T4, from one repository to a portfolio.
+- **Local clone**: a repository checked out beside this one, where tools look for it.
+- **Pruning**: removing old finished items with `git rm`.
 
 ## D. References
 

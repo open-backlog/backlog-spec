@@ -1,96 +1,64 @@
 # The reference implementation
 
-The specification needs no tool, but tools make common work faster and catch mistakes early.
-Open Backlog's reference implementation shows one way to build them. **At the time of writing it
-is designed and planned but not yet built**: this section describes it as designed, and the
-specification, not the implementation, remains the definition of a valid backlog.
+**Designed, not yet built.** This section describes the tools as designed. The specification, not
+the tools, defines a valid backlog.
 
-## Three parts, one set of rules
-
-| Part | Package | What it is |
+| Part | npm package | What it is |
 |---|---|---|
-| Core library | `open-backlog` (library entry) | reads, checks and changes a backlog; no command-line code |
-| `ob` | `open-backlog` (the `ob` command) | the command line, built on the core |
-| Board | `open-backlog-board` | a local web board, served by `ob serve`, built on the same core |
+| Core library | `open-backlog` | reads, checks and changes a backlog |
+| `ob` | `open-backlog` | the command line, on the core |
+| Board | `open-backlog-board` | a local web board, started by `ob serve`, on the same core |
 
-All three are TypeScript on Node, MIT-licensed, published to npm. The board depends on the
-published core rather than having its own, so the command line and the board cannot disagree
-about the rules. One install, `npm i -g open-backlog`, gives both: `ob serve` uses an installed
-board, or fetches the matching version the first time it runs.
+All are TypeScript on Node and MIT-licensed. The board uses the published core, so the command
+line and the board cannot disagree about the rules. `npm i -g open-backlog` installs both; the
+board is fetched the first time `ob serve` runs.
 
-## The core library
+## The core
 
-The core does what any implementation of the specification has to do, and is the part a tool
-builder can most easily reuse or copy:
+- **Read.** Walk up from the working folder to `backlog/config.yml`; load every item; take each
+  story's status from its folder; read IDs as text.
+- **Work out.** Resolve parents and children, compute progress, and sort by ID part by part.
+- **Check.** Every rule has a stable code and a message saying how to fix it. Single-file rules
+  use the specification's JSON Schema [@jsonschema07], the same one the site's file checker uses;
+  rules across files are code. A missing clone is a warning.
+- **Write without loss.** Change one field in place and keep comments, order, unknown fields and
+  the body exactly as they were, so a tool's edit looks like a careful hand edit in `git diff`.
+- **Number from history.** A new ID is one more than the highest in the files *and* in git
+  history, so a pruned number is never reused.
 
-- **Find and read a backlog.** Walk up from the working folder to `backlog/config.yml`; load the
-  config, every item, sprints and people; work out each story's status from its folder,
-  including subfolders of `done/`. Read IDs and versions as text ([read-as-text]).
-- **Work out the hierarchy.** Resolve each `parent`, build each item's children, compute
-  progress, and sort by ID with each part compared as a number, then by `rank`.
-- **Check every rule.** Each rule of the specification is a check with a stable code, a severity,
-  the file and a message saying how to fix it. Single-file checks use the specification's JSON
-  Schema [@jsonschema07], the same schema the site's file checker uses, so any tool built on that
-  schema agrees with this one; checks across files (parents exist, IDs unique) are code. A link
-  into a backlog that is not cloned is a warning ([local-clones]).
-- **Write without losing anything.** Change one field in place with a YAML library that keeps
-  comments, order and formatting, and leave the body and unknown fields exactly as they were
-  ([keep-unknown]). A read and write with no changes leaves a file byte for byte identical, so a
-  tool's edit looks like a careful hand edit in `git diff`.
-- **Number new items from history.** The next ID under a parent is one more than the highest in
-  the files *and* in git history, so a pruned number is never reused ([id-numbers]).
-- **Use the user's own git.** See below.
+The specification's example backlogs are the core's tests: each valid one must pass, and each
+`examples/invalid/<rule>/` must fail with exactly its rule.
 
-The specification's example backlogs are the core's test fixtures: every valid example must
-load and pass, and each `examples/invalid/<rule>/` backlog must fail with exactly its own rule.
+**Your own git.** The tools run the installed `git`, never a library or a server. They get the
+user's identity, SSH keys, credential helper and hooks for free, and need no account or API key.
+Each change is one commit of only the files it touched. Moves, comments and the board take
+`--no-commit` to leave committing to the user.
 
-## Your own git
+## `ob`
 
-The tools run the `git` command already installed, never a git library of their own and never a
-server. That one choice gives them the user's identity, SSH keys, credential helper, hooks and
-configuration with no set-up, and it keeps the promise of no account and no API key: if a person
-can push, the tools can, and if they cannot, neither can the tools.
+| Command | What it does | npm |
+|---|---|---|
+| `ob init` | creates `config.yml` and the folders | 0.1.0 |
+| `ob new <type> "Title" --parent <id>` | creates the next numbered item; a bug with no parent goes to this month's feature in epic `0` | 0.1.0 |
+| `ob validate` | reports errors and warnings; `--fix` renumbers duplicate IDs; works in CI and as a pre-commit hook | 0.1.0 |
+| `ob move`, `ob start`, `ob done` | `git mv` plus a commit; files by month when configured | 0.1.0 |
+| `ob list`, `ob show`, `ob tree` | items in build order; one item; the plan with progress | 0.1.0 |
+| `ob comment <id> "text"` | adds a dated comment under the handle from git config | 0.2.0 |
+| `ob serve` | starts the board | 0.3.0 |
 
-Each change is one `git mv` or edit plus one commit, staging only the files that change touched,
-so unrelated work in progress is never swept in. Every command that commits also has
-`--no-commit`, which leaves committing to the user. Outside a git repository the tools still read,
-check and write files; only committing needs git.
-
-## `ob`, the command line
-
-| Command | What it does |
-|---|---|
-| `ob init` | creates `backlog/config.yml` and the folders |
-| `ob new <type> "Title" --parent <id>` | creates the next numbered item from a template; a bug with no parent is filed in this month's feature of epic `0` |
-| `ob validate` | prints errors and warnings, exits non-zero on errors; `--fix` renumbers duplicate IDs; `--json`; works as a pre-commit hook and in CI |
-| `ob move <id> <status>`, `ob start`, `ob done` | `git mv` plus a commit; `ob done` files by month when configured |
-| `ob list` | story-level items in build order, with filters; recent finished work only, unless `--all` |
-| `ob show <id>`, `ob tree` | one item with its parent chain; the whole plan with progress |
-| `ob comment <id> "text"` | appends `- YYYY-MM-DD @handle: text`, the handle from git config, never the email |
-| `ob serve` | starts the board |
-
-Every command's result is identical to doing the same thing by hand, and is tested to be.
+Each command's result is to be identical to doing the same thing by hand.
 
 ## The board
 
-`ob serve` starts a web server bound to `127.0.0.1` only, with a JSON API over the core, and
-opens an Angular app in the browser: columns for `todo`, `doing` and `done`, drag a card to move
-it or to reorder it (which sets `rank`), an item view and editor, and a tree with progress bars.
-It watches the backlog folder, so an edit made in a text editor appears on the board within a
-second.
-
-Each board action is one commit, with a message like `ob: move 2.3.4 to doing`. The board never
-pushes on its own: a **Sync** button pulls, then pushes, shows how many commits are waiting, and
-on a conflict says which files and what to do, leaving the repository in a state a person can
-resolve by hand. There is no login, because there is no server beyond the user's own machine.
+`ob serve` listens on `127.0.0.1` only and opens a board: `todo`, `doing` and `done` columns, drag
+to move or reorder (setting `rank`), an item editor, and a tree with progress. An edit made in a
+text editor appears within a second. Each action is one commit, such as
+`ob: move 2.3.4 to doing`. The board never pushes on its own: a **Sync** button pulls and pushes,
+and on a conflict says which files and what to do. There is no login.
 
 ## For tool builders
 
-A tool that implements the specification needs, at minimum, the first four points of the core
-above: find and read, work out the hierarchy, check the rules, and write without losing anything.
-The JSON Schema covers the rules a single file can break; the example backlogs, valid and
-invalid, are a ready-made test suite; and the `tools/` examples check the three places careless
-tools go wrong (numbers read as text, unknown fields kept, missing clones). Nothing in the
-reference implementation is required to read or write an Open Backlog, and a tool in any
-language, an editor extension, or a bridge to another tracker is as much an implementation as
-`ob`.
+A tool needs the first four parts of the core: read, work out, check and write without loss. The
+JSON Schema covers single-file rules, the example backlogs are a test suite, and the `tools/`
+examples cover the three classic mistakes: numbers read as text, unknown fields dropped, and
+missing clones. An editor extension or a tracker bridge is as much an implementation as `ob`.

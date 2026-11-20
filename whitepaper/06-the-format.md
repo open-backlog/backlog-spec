@@ -1,14 +1,9 @@
 # The format
 
-An item is one Markdown file [@commonmark] that starts with a few lines of YAML [@yaml122]. This
-section walks through a real one: story 1.3.1 from the backlog this paper was planned in, the
-story that created the repository the specification lives in. The rules it follows are in
-section 3 of the specification [@openbacklog-spec]; here the point is to show how they read.
-
-## A real story
-
-Here is the file `backlog/stories/done/2026-11/1.3.1-repo-scaffold.md`, with its longer
-paragraphs cut short (marked `…`):
+An item is a Markdown file [@commonmark] that starts with YAML front matter [@yaml122]. Here is
+a real one from the backlog this paper was planned in,
+`stories/done/2026-11/1.3.1-repo-scaffold.md`, shortened where marked `…`. The rules are in
+section 3 of the specification [@openbacklog-spec].
 
 ```markdown
 ---
@@ -46,74 +41,37 @@ repo: backlog-spec
     - …
 ```
 
-## The name
+**The name.** The filename is the ID and a slug: `1.3.1-repo-scaffold.md`. Three parts make it a
+story-level item; dropping the last part gives its feature `1.3`, and dropping another its epic
+`1`, so the path reads `1-foundation › 1.3-spec › 1.3.1-repo-scaffold`. The slug can change; the
+ID cannot.
 
-The filename is the ID, a dash and a slug: `1.3.1-repo-scaffold.md`. The ID says where the story
-sits, the slug says what it is, and together they make a directory listing readable without
-opening a file. The ID has three parts, so this is a story-level item. Dropping the last part
-gives its feature, `1.3`; dropping another gives its epic, `1`. In this backlog those are
-`1.3-spec.md` ("Spec draft") and `1-foundation.md` ("Foundation"), so the path to the story reads
-`1-foundation › 1.3-spec › 1.3.1-repo-scaffold`: the first story of the spec-draft feature of the
-foundation epic. The slug can be reworded at any time; the ID cannot.
+**The header** holds what a program needs:
 
-## The header
+- `id`, `type` and `title` are required. `id` repeats the filename's ID, so a tool can check both.
+- `parent: 1.3` is the item's one link to the rest of the backlog.
+- `repo: backlog-spec` is optional. It names the repository the work changes (section 8).
+- The other optional fields, `rank`, `sprint`, `estimate`, `assignee`, `release` and `due`, are
+  added when used. Teams may add their own fields, such as `customer: acme`; tools keep them.
+- IDs are read as text, so `parent: 1.10` is never mistaken for 1.1, and nobody needs to quote it.
 
-The front matter is a YAML mapping between two `---` lines, and it holds only what a program
-needs to find, check and order the item:
+**The body** is free Markdown, with a recommended shape:
 
-- `id`, `type` and `title` are required. `id` repeats the filename's ID, so the file still
-  identifies itself if it is renamed or copied, and a tool can check that the two agree.
-- `parent: 1.3` is the one link to the rest of the backlog. The feature does not list this
-  story; it is a child of `1.3` because it says so.
-- `repo: backlog-spec` is optional. This backlog plans work across several repositories (tier
-  T3, section 8), so each story names the one it changes, and `config.yml` lists where each
-  repository is cloned from.
+- **As a … I want to … So that …**: who it is for, what they want, and how to check it is done.
+  Each "So that" line is an acceptance test.
+- **As built**: what was done and checked, written when the work is finished.
+- **Comments**, last: one list item each, starting with a date and a handle, as in
+  `- 2026-11-19 @claude: …`. This is the only part of the body the specification fixes.
 
-The other optional fields (`rank`, `sprint`, `estimate`, `assignee`, `release`, `due`) are
-absent here, as they are from most items in a small backlog. A team adds a field when it starts
-using it, and may add fields of its own, such as `customer: acme`; tools keep fields they do not
-know. What never appears is a field for something that can be worked out: no `status`, no
-`children`, no `progress`.
-
-Values that look like numbers are read as the text written. YAML would read `parent: 1.10` as
-the number 1.1 [@yaml122], which is a different feature, so the specification has tools read
-IDs as text, and a person never needs to quote them.
-
-## The body
-
-Everything after the header is Markdown, written for people. The specification recommends a
-shape for stories and requires only one detail of it:
-
-- **As a … I want to … So that …** says who the work is for, what they want, and how anyone will
-  know it is done. Writing each "So that" line as something that can be checked ("Verify the
-  README explains the idea without any other file") turns it into the story's acceptance test.
-- **As built** is written when the work is finished: what was actually done, what was checked,
-  and anything that differs from the plan. It is the part of a story most useful a year later.
-- **Comments** come last, one list item each, oldest first, starting with a date and a handle:
-  `- 2026-11-19 @claude: …`. This is the one part of the body the specification fixes, so tools
-  can add comments and read them back. A comment may continue on indented lines, as the change
-  set above does.
-
-People are named by handle, never by email address. A backlog is read by everyone with a clone,
-and often published; `people.yml` can map a handle to a name, but an address does not belong in
-the files.
-
-## Other items
-
-Epics and features use the same format with less in them. The feature this story belongs to is
-`backlog/features/1.3-spec.md`; its header is `id: 1.3`, `type: feature`,
-`title: Spec draft` and `parent: 1`, and its body, in the same As a / So that shape, says what
-the feature delivers. It holds no list of its stories and no
-status: both come from the story files.
+Epics and features use the same format with less in them. Feature `1.3-spec.md` has `id`, `type`,
+`title` and `parent: 1`, and a body saying what it delivers. It never lists its stories.
 
 ## By hand, from nothing
-
-A complete backlog can be started with a text editor:
 
 1. Create `backlog/config.yml` with two lines: `spec: 0.1` and `name: my-app`.
 2. Create `backlog/epics/1-first-release.md` with `id: 1`, `type: epic` and a `title`.
 3. Create `backlog/features/1.1-sign-in.md` with `id: 1.1`, `type: feature`, a `title` and
    `parent: 1`.
-4. Create `backlog/stories/todo/1.1.1-email-link.md` with `id: 1.1.1`, `type: story`, a
-   `title`, `parent: 1.1`, and an As a / So that body.
-5. Commit. The backlog is valid, and the next section shows how the story moves.
+4. Create `backlog/stories/todo/1.1.1-email-link.md` with `id: 1.1.1`, `type: story`, a `title`
+   and `parent: 1.1`.
+5. Commit. The backlog is valid.

@@ -1,52 +1,27 @@
 # Working with AI agents
 
-This section is informative. It adds nothing to the specification, and a team that never uses an
-AI agent can skip it and lose nothing: every part of Open Backlog works with a person, a text
-editor and git.
+This section adds nothing to the specification. A team that never uses AI loses nothing.
 
-## The same operations
+An AI coding agent already reads files, edits them and runs `git mv` and `git commit`. That is all
+an Open Backlog needs, so an agent works a story exactly as a person does: it reads the story and
+its parents, moves it to `doing/`, does the work, writes `## As built`, and moves it to `done/`.
+There is no agent API, format or permission. Its access to the backlog is its access to the
+repository.
 
-An AI coding agent working in a repository already does three things well: it reads files, it
-edits files, and it runs commands such as `git mv` and `git commit`. That is everything an Open
-Backlog needs. An agent working a story does what a person does:
+- **Context is a read away.** The story, its feature, the design and the code are all in the
+  working tree. Nobody pastes the story into a prompt.
+- **No tokens.** The agent needs no tracker account, so no token can leak.
+- **Changes are reviewable.** When an agent re-plans or writes acceptance criteria, it is a diff
+  in a pull request.
+- **One history.** What an agent did and what a person did are in the same `git log`.
 
-1. Read `backlog/stories/todo/` and pick the story it was given, or the next by rank.
-2. Read the story, its feature and its epic by following `parent`, and any linked design
-   document, to understand what is wanted and why.
-3. `git mv` the story to `doing/` and commit.
-4. Do the work, checking each "So that" line as it goes.
-5. Write `## As built`, add a dated comment with its handle, `git mv` the story to `done/`, and
-   commit with the code, or open a pull request for a person to review.
+This project's backlog was worked this way: an AI agent did each story and moved its file, adding
+comments as `@claude`, and a person reviewed, committed and released.
 
-There is no agent API, no special format and no separate permission. The agent's access to the
-backlog is exactly its access to the repository, and every change it makes is a commit with an
-author, reviewed and reverted like any other.
+## A sample AGENTS.md
 
-## Why plain files suit agents
-
-- **Context is a read away.** The story, its parent feature, the design and the code are all in
-  the working tree. Nobody has to paste the story into a prompt, and the agent sees the current
-  version, not a copy.
-- **Nothing to authenticate.** The agent needs no tracker account and no API token, so no token
-  can leak and no integration can break.
-- **Changes are reviewable.** When an agent re-plans, splits a story or writes acceptance
-  criteria, the change is a diff in a pull request. A person approves the plan the same way they
-  approve the code.
-- **History is shared.** What an agent did and what a person did are in the same `git log`, in
-  the same form.
-
-The backlog this paper was planned in was worked largely this way. An AI coding agent picked up
-each story file, did the work, wrote its `## As built`, added a comment under the handle
-`@claude` and moved the file; a person reviewed, committed and released. The story files in
-sections 6 and 7 are examples of that work.
-
-## Telling an agent about the backlog
-
-Agents need to be told the conventions of a repository, and many coding agents now read a file
-named `AGENTS.md` for that: a README written for agents [@agentsmd]. The snippet below is an
-example of what a team might put in theirs. **It is not part of the specification**: the
-wording, the steps and the habits it asks for are one team's choice, and any of them can be
-changed.
+Many coding agents read a file named `AGENTS.md` for a repository's conventions [@agentsmd]. This
+is an example, **not part of the specification**:
 
 ```markdown
 ## Backlog
@@ -69,14 +44,7 @@ This repo plans its work in `backlog/`, an Open Backlog (https://openbacklog.org
   pull request; do not start them until a person has merged the plan.
 ```
 
-A tool can also help an agent: the reference implementation's `ob` commands (section 12) give
-it short, checked operations instead of raw file edits. They are a convenience for agents just as
-for people, never a requirement.
-
 ## Keeping people in charge
 
-An agent that can move a file can move it too early. The safeguards are the ones a team already
-uses for code: the agent works on a branch, its changes arrive as a pull request, a person merges
-them, and a validator in CI rejects a backlog that breaks the rules. Because the plan and the
-work are reviewed together, a person sees both what the agent claimed and what it did before
-either is accepted.
+The safeguards are the ones used for code: the agent works on a branch, its changes arrive as a
+pull request, a person merges them, and a validator in CI rejects a backlog that breaks the rules.

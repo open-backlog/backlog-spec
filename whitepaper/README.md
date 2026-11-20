@@ -14,6 +14,8 @@ holds every source the paper cites, as `[@key]`; they are listed in appendix D. 
 is written (2.1.1–2.1.8). Appendix B copies the JSON Schema in full, and `npm test` fails if
 that copy ever differs from `schema/0.1/`.
 
+`drafts/` keeps earlier versions of the paper with a decision log; nothing there is published.
+
 `figures/` holds the diagrams the paper embeds, copied from backlog-art's `diagrams/` by
 `script/sync-art.sh`; change them there, never here.
 
