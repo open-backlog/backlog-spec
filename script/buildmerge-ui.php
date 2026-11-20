@@ -9,6 +9,7 @@
  *
  *   spec/README.md                 the spec, rendered by backlog-ui's /spec page at build time
  *   schema/<version>/*.schema.json the JSON Schema, served at https://openbacklog.org/schema/
+ *   examples.ts                    every file under examples/ (path => text), for /examples
  *   source.ts                      which commit of this repo the copy came from
  *
  * Run it whenever the site should see a spec change: then `npx ng serve` in backlog-ui shows it
@@ -25,7 +26,7 @@ if (!$ui) fail("no backlog-ui beside backlog-spec");
 
 $git = 'git -C ' . escapeshellarg($specRoot);
 $commit = trim((string)shell_exec("$git rev-parse --short HEAD 2>/dev/null")) ?: 'unknown';
-$dirty = trim((string)shell_exec("$git status --porcelain -- spec schema 2>/dev/null")) !== '';
+$dirty = trim((string)shell_exec("$git status --porcelain -- spec schema examples 2>/dev/null")) !== '';
 $source = $commit . ($dirty ? '+dirty' : '');
 
 $out = "$ui/src/content/backlog-spec";
@@ -39,6 +40,16 @@ foreach (glob("$specRoot/schema/*", GLOB_ONLYDIR) as $dir) {
 	@mkdir("$out/schema/" . basename($dir), 0755, true);
 	foreach (glob("$dir/*.schema.json") as $f) { copy($f, "$out/schema/" . basename($dir) . '/' . basename($f)); $n++; }
 }
+// The examples, as one module: path under examples/ => file text, sorted by path.
+$examples = array();
+$it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator("$specRoot/examples", FilesystemIterator::SKIP_DOTS));
+foreach ($it as $f) $examples[substr($f->getPathname(), strlen("$specRoot/examples") + 1)] = file_get_contents($f->getPathname());
+ksort($examples);
+file_put_contents("$out/examples.ts",
+	"// Written by backlog-spec's script/buildmerge-ui.php: every file under examples/, path => text.\n" .
+	"export const EXAMPLES: Record<string, string> = " .
+	json_encode($examples, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) . ";\n");
+
 file_put_contents("$out/source.ts",
 	"// Written by backlog-spec's script/buildmerge-ui.php: the backlog-spec commit this copy came\n" .
 	"// from, with +dirty if it included uncommitted changes (buildmerge-web.php refuses those).\n" .
