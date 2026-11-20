@@ -29,6 +29,7 @@ $dirty = trim((string)shell_exec("$git status --porcelain -- spec schema 2>/dev/
 $source = $commit . ($dirty ? '+dirty' : '');
 
 $out = "$ui/src/content/backlog-spec";
+$before = snapshot($out);
 remove_tree($out);
 @mkdir("$out/spec", 0755, true);
 copy("$specRoot/spec/README.md", "$out/spec/README.md") or fail("could not copy spec/README.md");
@@ -46,9 +47,35 @@ file_put_contents("$out/README.md",
 	"# src/content/backlog-spec/\n\n" .
 	"Generated: do not edit. backlog-spec's `script/buildmerge-ui.php` replaces this folder with\n" .
 	"the spec text and JSON Schema the site publishes, from backlog-spec $source.\n");
-say("replaced backlog-ui/src/content/backlog-spec/ from backlog-spec $source (spec + $n schema files)");
+say("backlog-spec $source -> backlog-ui/src/content/backlog-spec/");
+report($before, snapshot($out));
 if ($dirty) say("note: includes uncommitted changes; fine for ng serve, refused by buildmerge-web.php");
 say("next: npx ng serve in backlog-ui to see it; buildmerge-web.php there when ready to deploy");
+
+// Every file under $dir, as relative path => content hash.
+function snapshot ($dir)
+{
+	$files = array();
+	if (!is_dir($dir)) return $files;
+	$it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($dir, FilesystemIterator::SKIP_DOTS));
+	foreach ($it as $f) $files[substr($f->getPathname(), strlen($dir) + 1)] = md5_file($f->getPathname());
+	ksort($files);
+	return $files;
+}
+
+// One line per file: + new, ~ changed, = unchanged, - removed; then the totals.
+function report ($before, $after)
+{
+	$count = array('+' => 0, '~' => 0, '=' => 0, '-' => 0);
+	$all = array_unique(array_merge(array_keys($before), array_keys($after)));
+	sort($all);
+	foreach ($all as $rel) {
+		$mark = !isset($before[$rel]) ? '+' : (!isset($after[$rel]) ? '-' : ($before[$rel] === $after[$rel] ? '=' : '~'));
+		$count[$mark]++;
+		print("  $mark $rel\n");
+	}
+	say("{$count['+']} new, {$count['~']} changed, {$count['=']} unchanged, {$count['-']} removed");
+}
 
 function remove_tree ($path)
 {
