@@ -16,8 +16,9 @@ it the same way.
 5. [The body](#5-the-body)
 6. [Sprints and people](#6-sprints-and-people)
 7. [IDs and filenames](#7-ids-and-filenames)
+8. [Layout and lifecycle](#8-layout-and-lifecycle)
 
-Not written yet in this draft: the folder layout and lifecycle, and configuration and scale.
+Not written yet in this draft: configuration and scale.
 
 ## 1. Conventions
 
@@ -403,3 +404,91 @@ Two people working on separate branches can both file the next number, such as `
 the branches merge, the backlog has two items with that ID and breaks [id-unique]. The fix:
 the item added later in git history takes the next free number under the same item, and its
 file is renamed to match. A tool SHOULD offer to do this; it is the only time an ID changes.
+
+## 8. Layout and lifecycle
+
+### The folders
+
+A backlog is one folder, usually `backlog/` at the top of a repository. Inside it, every file
+has one place:
+
+```
+backlog/
+├── config.yml          required: the backlog's settings
+├── people.yml          optional: handles and names (section 6)
+├── capabilities/       C1-identity.md
+├── epics/              0-unplanned.md, 2-build.md
+├── features/           0.1-2026-11.md, 2.3-cli.md
+├── sprints/            optional: 2026-S24.md (section 6)
+└── stories/            story, bug, spike and task files, by status:
+    ├── todo/           2.3.5-ob-list.md
+    ├── doing/          2.3.4-ob-move.md
+    └── done/           2.3.3-ob-validate.md, or done/2026-11/2.3.3-ob-validate.md
+```
+
+Folders that would be empty MAY be left out.
+
+- **[config-file]** A backlog MUST have a `config.yml` at its top.
+- **[item-folder]** Capabilities MUST be in `capabilities/`, epics in `epics/` and features in
+  `features/`; story-level items MUST be directly in `stories/todo/` or `stories/doing/`, or
+  anywhere under `stories/done/`.
+
+### Status is the folder
+
+A story-level item's status is the folder it is in:
+
+| Folder | Status |
+|---|---|
+| `stories/todo/` | not started |
+| `stories/doing/` | in progress |
+| `stories/done/` | finished |
+
+Changing status is moving the file, and nothing else: no field changes, and no other file is
+touched. With git:
+
+```sh
+git mv backlog/stories/todo/2.3.4-ob-move.md backlog/stories/doing/
+git commit -m "2.3.4 doing"
+```
+
+The commit records who moved it and when, so git history is the item's timeline.
+
+- **[no-stored-status]** An item MUST NOT have a `status` or `progress` field; both are worked
+  out from the folders.
+
+### Only story-level items move
+
+Capabilities, epics and features stay in their folders for good. Their progress is worked out
+from the story-level items below them:
+
+- a **feature** is done when it has story-level items and all of them are in `done/`, and in
+  progress when any of them is in `doing/` or `done/`;
+- an **epic** is done when all its features are done, and a **capability** when all its epics
+  are;
+- a tool MAY show progress as a count (`3 of 5 done`), or weighted by `estimate`.
+
+Nothing is stored that can be worked out: not progress, not a list of children, not an index
+of the backlog. A backlog is always up to date because there is nothing to keep in sync.
+
+### Order
+
+Items are listed by ID, comparing each part as a number: `2.9` before `2.10`, and `2.3.4`
+before `2.3.10`. Within a status folder, items with a `rank` come first, lowest rank first,
+and the rest follow in ID order ([section 4](#4-fields)).
+
+### Done subfolders
+
+`stories/done/` grows forever, so it MAY be split into subfolders with any names, at any
+depth: by month, by release, or by sprint. A backlog can set `done-folders: month` in its
+configuration so tools file finished items into `done/YYYY-MM/`, by the month they were
+finished. Moving an item between `done/` subfolders does not change its status.
+
+### Pruning
+
+Old items MAY be removed with `git rm` to keep the backlog small. Git history still has them:
+a tool can show a pruned item from its last commit, and its ID stays used for good
+([id-forever]), so the next number skips it.
+
+- **[prune-children]** An item MUST NOT be pruned while items that name it as `parent` remain.
+
+So prune finished stories first, and a feature or epic only after everything under it.

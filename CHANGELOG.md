@@ -17,6 +17,10 @@ change makes an existing valid backlog invalid or changes what it means; see
   [read-as-text]; optional fields `rank`, `sprint`, `estimate`,
   `assignee`, `release`, `due`, `repo` with their formats [field-format], [sprint-exists];
   no email addresses [no-email]; unknown fields are kept by tools [keep-unknown].
+- Added: the layout, with `config.yml` required [config-file] and each item in its type's
+  folder [item-folder]; status is the folder (`todo`, `doing`, `done`) and never stored
+  [no-stored-status]; only story-level items move; progress, order, `done/` subfolders and
+  pruning [prune-children].
 - Added: IDs by depth (epic `2`, feature `2.3`, story-level `2.3.4`, capability `C1`)
   [id-form], unique [id-unique], numbered in build order [id-new], never changed or reused
   [id-forever]; filenames `<id>-<slug>.md` [filename], [slug-form]; references by ID and
