@@ -17,6 +17,11 @@ change makes an existing valid backlog invalid or changes what it means; see
   [read-as-text]; optional fields `rank`, `sprint`, `estimate`,
   `assignee`, `release`, `due`, `repo` with their formats [field-format], [sprint-exists];
   no email addresses [no-email]; unknown fields are kept by tools [keep-unknown].
+- Added: IDs by depth (epic `2`, feature `2.3`, story-level `2.3.4`, capability `C1`)
+  [id-form], unique [id-unique], numbered in build order [id-new], never changed or reused
+  [id-forever]; filenames `<id>-<slug>.md` [filename], [slug-form]; references by ID and
+  across backlogs as `name/2.3.4`; epic `0` with monthly features for unplanned work
+  [epic-zero]; duplicates from parallel branches renumbered, later one first.
 - Added: the body, the recommended story shape and comment lines [comment-line].
 - Added: sprint files [sprint-dates], [sprint-no-list] and `people.yml` [people-format],
   [people-no-email].

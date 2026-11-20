@@ -15,9 +15,9 @@ it the same way.
 4. [Fields](#4-fields)
 5. [The body](#5-the-body)
 6. [Sprints and people](#6-sprints-and-people)
+7. [IDs and filenames](#7-ids-and-filenames)
 
-Not written yet in this draft: IDs and filenames, the folder layout and lifecycle, and
-configuration and scale.
+Not written yet in this draft: the folder layout and lifecycle, and configuration and scale.
 
 ## 1. Conventions
 
@@ -140,7 +140,7 @@ next line `---`. Everything after it is the body ([section 5](#5-the-body)).
 
 | Field | Format |
 |---|---|
-| `id` | The item's ID, written as a string, such as `2.3.4` or `C1`. Its form is set by the item's place in the hierarchy. |
+| `id` | The item's ID, such as `2.3.4` or `C1`, in the form [section 7](#7-ids-and-filenames) sets for its type. |
 | `type` | One of the seven types in [section 2](#2-items-and-types). |
 | `title` | A short name for the item, as text on one line. |
 | `parent` | The `id` of the item above it, as [section 3](#3-the-hierarchy) requires. |
@@ -302,3 +302,104 @@ jo-smith:
 
 An `assignee` or a comment's handle need not appear in `people.yml`; a tool shows the handle
 itself when it has no name for it.
+
+## 7. IDs and filenames
+
+### The form of an ID
+
+IDs are numbers, and the number of parts gives the type:
+
+| Type | ID | Example |
+|---|---|---|
+| epic | one number | `2` |
+| feature | its epic's number, a dot, a number | `2.3` |
+| story-level | its feature's ID, a dot, a number | `2.3.4` |
+| capability | `C` and a number | `C1` |
+
+Each number is a whole number written without leading zeros. Epic `0` is kept for unplanned
+work (below); every other number starts at `1`.
+
+- **[id-form]** An item's `id` MUST have the form the table gives for its type.
+- **[id-unique]** Each item's `id` MUST be different from every other item's `id` in the backlog.
+
+### Numbering is the build order
+
+A new item takes the next number under the item it is filed under: one more than the highest
+number ever used there, counting items since deleted. So `2.3.5` is filed after `2.3.4`, and
+reading the IDs in order (`1`, `1.1`, `1.1.1`, …, `2`, `2.1`, …) is the order the work was
+planned in. A capability takes the next `C` number in the backlog.
+
+- **[id-new]** A new item's ID MUST be the ID of the item it is filed under, a dot, and the
+  next number there; a new epic or capability takes the next number in the backlog.
+- **[id-forever]** An item's ID MUST NOT change once the item exists, and a number MUST NOT be
+  used again after its item is deleted.
+
+Git history keeps deleted items, so the highest number ever used is the highest in the
+backlog's history. The one exception to [id-forever] is a duplicate (below).
+
+### What an ID tells you
+
+Dropping the last number of an ID gives the item it was filed under, and the filenames along
+the way spell out what it is: `2.3.4` is in `2-build › 2.3-cli › 2.3.4-ob-move`.
+
+An ID records where an item was **filed**; its `parent` says where it **is**. The two agree
+until the item is moved to another parent. Then the `parent` field is the link, the ID keeps
+its number, and the ID's first numbers show where the item came from. Section 3 still holds:
+a link is written in one place, the `parent` field.
+
+### Filenames
+
+An item's file is named for its ID and a slug, a few words saying what it is:
+`<id>-<slug>.md`, such as `2.3.4-ob-move.md`, `2-build.md` or `C1-identity.md`.
+
+- **[filename]** An item's file MUST be named `<id>-<slug>.md`, with its `id` exactly as in
+  its front matter.
+- **[slug-form]** A slug MUST be lowercase letters and digits, in words joined by single dashes.
+
+The slug MAY be edited at any time (a `git mv` renames the file); the number does not change.
+
+### Referring to an item
+
+Refer to an item by its ID alone: `2.3.4`, not its filename, since the slug can change. To
+refer to an item in another backlog, put that backlog's `name` (from its configuration) in
+front with a slash: `notes/2.3.4`.
+
+### Unplanned work: epic `0`
+
+A bug or task that turns up outside the plan still belongs to a feature. It goes to epic `0`,
+*unplanned work*, which has one feature per month, numbered in month order and slugged by the
+month: `0.1-2026-11`, `0.2-2026-12`, and so on.
+
+- **[epic-zero]** Epic `0` MUST hold only monthly features, each slugged `YYYY-MM`, with their
+  numbers in the order of their months.
+
+To file a stray, create its file in this month's feature: for example `0.2.1-login-loop.md`
+with `parent: 0.2`. If this is the first stray of the month, create the month's feature first,
+and the first time ever, epic `0` too:
+
+```yaml
+---
+id: 0
+type: epic
+title: Unplanned work
+---
+```
+
+```yaml
+---
+id: 0.2
+type: feature
+title: Unplanned, 2026-12
+parent: 0
+---
+```
+
+When the stray turns out to belong to a planned feature, change its `parent` to that
+feature. It keeps its ID, such as `0.2.1`, which records that it arrived as unplanned work.
+
+### Duplicates
+
+Two people working on separate branches can both file the next number, such as `2.3.5`. When
+the branches merge, the backlog has two items with that ID and breaks [id-unique]. The fix:
+the item added later in git history takes the next free number under the same item, and its
+file is renamed to match. A tool SHOULD offer to do this; it is the only time an ID changes.
