@@ -1,5 +1,20 @@
 # whitepaper/
 
-The whitepaper: one Markdown file per section, built to a PDF.
+The Open Backlog whitepaper: why a backlog belongs beside its code, the convention and its
+reasoning, and the tools built for it. One Markdown file per section, in order:
 
-Not written yet: this is a draft of spec 0.1.
+| File | Section |
+|---|---|
+| `01-abstract.md` | Abstract and executive summary |
+| `02-the-problem.md` … `17-roadmap-and-conclusion.md` | Sections 2 to 17 |
+| `18-appendices.md` | Appendices |
+
+`metadata.yml` holds the title, subtitle, author, version, date and license; `references.bib`
+holds every source the paper cites, as `[@key]`. A section not written yet is a heading and a
+TODO line saying what goes there.
+
+The paper is rendered to the site and built to a PDF with Pandoc and Typst; the build arrives in
+its own change. To read it today, any Markdown viewer works, file by file.
+
+The normative rules are in [spec/](../spec/); where the paper and the spec differ, the spec wins.
+Licensed [CC-BY-4.0](../LICENSE).
