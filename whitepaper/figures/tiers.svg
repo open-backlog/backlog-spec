@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 504" role="img" aria-labelledby="tiers-t tiers-d">
+<title id="tiers-t">The four tiers of an Open Backlog</title>
+<desc id="tiers-d">T1: backlog/ inside the code repo. T2: backlog/ in a separate repo. T3: one backlog repo lists the application's repos and each story names one. T4: a portfolio backlog lists several application backlogs.</desc>
+<style>svg{--c-surface:#ffffff;--c-subtle:#f6f8fa;--c-border:#d0d7de;--c-ink:#1f2328;--c-muted:#59636e;--c-brand:#b45309;--c-todo:#59636e;--c-doing:#0a3069;--c-done:#1a7f37}@media (prefers-color-scheme:dark){svg{--c-surface:#0d1117;--c-subtle:#161b22;--c-border:#30363d;--c-ink:#e6edf3;--c-muted:#9198a1;--c-brand:#f0a33a;--c-todo:#9198a1;--c-doing:#2f81f7;--c-done:#3fb950}}.f-surface{fill:var(--ob-surface,var(--c-surface))}.s-surface{stroke:var(--ob-surface,var(--c-surface))}.f-subtle{fill:var(--ob-subtle,var(--c-subtle))}.s-subtle{stroke:var(--ob-subtle,var(--c-subtle))}.f-border{fill:var(--ob-border,var(--c-border))}.s-border{stroke:var(--ob-border,var(--c-border))}.f-ink{fill:var(--ob-ink,var(--c-ink))}.s-ink{stroke:var(--ob-ink,var(--c-ink))}.f-muted{fill:var(--ob-muted,var(--c-muted))}.s-muted{stroke:var(--ob-muted,var(--c-muted))}.f-brand{fill:var(--ob-brand,var(--c-brand))}.s-brand{stroke:var(--ob-brand,var(--c-brand))}.f-todo{fill:var(--ob-todo,var(--c-todo))}.s-todo{stroke:var(--ob-todo,var(--c-todo))}.f-doing{fill:var(--ob-doing,var(--c-doing))}.s-doing{stroke:var(--ob-doing,var(--c-doing))}.f-done{fill:var(--ob-done,var(--c-done))}.s-done{stroke:var(--ob-done,var(--c-done))}text{font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;fill:var(--ob-ink,var(--c-ink));white-space:pre}.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}.b{font-weight:700}.m{fill:var(--ob-muted,var(--c-muted))}</style>
+<text x="8" y="22" font-size="15" class="mono b f-brand">T1</text>
+<text x="40" y="22" font-size="14" class="b">Inside the code repo</text>
+<text x="40" y="39" font-size="12" class="m">backlog/ sits next to the code</text>
+<rect x="8" y="50" width="384" height="56" rx="7" class="f-surface s-border" stroke-width="1.2"/>
+<text x="18" y="68" font-size="12" class="mono b">my-app</text>
+<rect x="18" y="76" width="39.4" height="20" rx="4" class="f-subtle s-border" stroke-width="1"/>
+<text x="23" y="90" font-size="12" class="mono m">src/</text>
+<rect x="63.4" y="76" width="69.8" height="20" rx="4" class="f-subtle s-border" stroke-width="1"/>
+<rect x="67.4" y="80" width="3" height="12" rx="1" class="f-brand"/>
+<text x="72.4" y="90" font-size="12" class="mono f-brand">backlog/</text>
+<text x="8" y="140" font-size="15" class="mono b f-brand">T2</text>
+<text x="40" y="140" font-size="14" class="b">A separate backlog repo</text>
+<text x="40" y="157" font-size="12" class="m">the same folder, in a repo of its own</text>
+<rect x="8" y="168" width="186" height="56" rx="7" class="f-surface s-border" stroke-width="1.2"/>
+<text x="18" y="186" font-size="12" class="mono b">my-app</text>
+<rect x="18" y="194" width="39.4" height="20" rx="4" class="f-subtle s-border" stroke-width="1"/>
+<text x="23" y="208" font-size="12" class="mono m">src/</text>
+<rect x="206" y="168" width="186" height="56" rx="7" class="f-surface s-border" stroke-width="1.2"/>
+<text x="216" y="186" font-size="12" class="mono b">my-app-docs</text>
+<rect x="216" y="194" width="69.8" height="20" rx="4" class="f-subtle s-border" stroke-width="1"/>
+<rect x="220" y="198" width="3" height="12" rx="1" class="f-brand"/>
+<text x="225" y="208" font-size="12" class="mono f-brand">backlog/</text>
+<text x="8" y="258" font-size="15" class="mono b f-brand">T3</text>
+<text x="40" y="258" font-size="14" class="b">An application</text>
+<text x="40" y="275" font-size="12" class="m">one backlog lists its repos; each story names one</text>
+<rect x="8" y="286" width="200" height="74" rx="7" class="f-surface s-border" stroke-width="1.2"/>
+<text x="18" y="304" font-size="12" class="mono b">app-docs</text>
+<rect x="18" y="312" width="69.8" height="20" rx="4" class="f-subtle s-border" stroke-width="1"/>
+<rect x="22" y="316" width="3" height="12" rx="1" class="f-brand"/>
+<text x="27" y="326" font-size="12" class="mono f-brand">backlog/</text>
+<text x="18" y="350" font-size="12" class="mono m">repos: web, ui, cli</text>
+<rect x="300" y="280" width="92" height="24" rx="5" class="f-surface s-border" stroke-width="1.2"/>
+<text x="310" y="296" font-size="12" class="mono">app-web</text>
+<path d="M208 323 C254.0 323 254.0 292 300 292" fill="none" class="s-muted" stroke-width="1.2"/>
+<rect x="300" y="310" width="92" height="24" rx="5" class="f-surface s-border" stroke-width="1.2"/>
+<text x="310" y="326" font-size="12" class="mono">app-ui</text>
+<path d="M208 323 C254.0 323 254.0 322 300 322" fill="none" class="s-muted" stroke-width="1.2"/>
+<rect x="300" y="340" width="92" height="24" rx="5" class="f-surface s-border" stroke-width="1.2"/>
+<text x="310" y="356" font-size="12" class="mono">app-cli</text>
+<path d="M208 323 C254.0 323 254.0 352 300 352" fill="none" class="s-muted" stroke-width="1.2"/>
+<text x="8" y="392" font-size="15" class="mono b f-brand">T4</text>
+<text x="40" y="392" font-size="14" class="b">A portfolio</text>
+<text x="40" y="409" font-size="12" class="m">a portfolio backlog lists the app backlogs</text>
+<rect x="8" y="420" width="168" height="74" rx="7" class="f-surface s-border" stroke-width="1.2"/>
+<text x="18" y="438" font-size="12" class="mono b">portfolio</text>
+<rect x="18" y="446" width="69.8" height="20" rx="4" class="f-subtle s-border" stroke-width="1"/>
+<rect x="22" y="450" width="3" height="12" rx="1" class="f-brand"/>
+<text x="27" y="460" font-size="12" class="mono f-brand">backlog/</text>
+<text x="18" y="484" font-size="12" class="mono m">backlogs: a, b</text>
+<rect x="236" y="418" width="156" height="32" rx="7" class="f-surface s-border" stroke-width="1.2"/>
+<text x="246" y="436" font-size="12" class="mono b">a-docs  backlog/</text>
+<path d="M176 457 C206.0 457 206.0 434 236 434" fill="none" class="s-muted" stroke-width="1.2"/>
+<rect x="236" y="458" width="156" height="32" rx="7" class="f-surface s-border" stroke-width="1.2"/>
+<text x="246" y="476" font-size="12" class="mono b">b-docs  backlog/</text>
+<path d="M176 457 C206.0 457 206.0 474 236 474" fill="none" class="s-muted" stroke-width="1.2"/>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 232" role="img" aria-labelledby="story-lifecycle-t story-lifecycle-d">
+<title id="story-lifecycle-t">A story moving from todo to doing to done</title>
+<desc id="story-lifecycle-d">Story 2.3.4 moves from the todo folder to doing to done; each move is a git mv of the same file, so git keeps its history.</desc>
+<style>svg{--c-surface:#ffffff;--c-subtle:#f6f8fa;--c-border:#d0d7de;--c-ink:#1f2328;--c-muted:#59636e;--c-brand:#b45309;--c-todo:#59636e;--c-doing:#0a3069;--c-done:#1a7f37}@media (prefers-color-scheme:dark){svg{--c-surface:#0d1117;--c-subtle:#161b22;--c-border:#30363d;--c-ink:#e6edf3;--c-muted:#9198a1;--c-brand:#f0a33a;--c-todo:#9198a1;--c-doing:#2f81f7;--c-done:#3fb950}}.f-surface{fill:var(--ob-surface,var(--c-surface))}.s-surface{stroke:var(--ob-surface,var(--c-surface))}.f-subtle{fill:var(--ob-subtle,var(--c-subtle))}.s-subtle{stroke:var(--ob-subtle,var(--c-subtle))}.f-border{fill:var(--ob-border,var(--c-border))}.s-border{stroke:var(--ob-border,var(--c-border))}.f-ink{fill:var(--ob-ink,var(--c-ink))}.s-ink{stroke:var(--ob-ink,var(--c-ink))}.f-muted{fill:var(--ob-muted,var(--c-muted))}.s-muted{stroke:var(--ob-muted,var(--c-muted))}.f-brand{fill:var(--ob-brand,var(--c-brand))}.s-brand{stroke:var(--ob-brand,var(--c-brand))}.f-todo{fill:var(--ob-todo,var(--c-todo))}.s-todo{stroke:var(--ob-todo,var(--c-todo))}.f-doing{fill:var(--ob-doing,var(--c-doing))}.s-doing{stroke:var(--ob-doing,var(--c-doing))}.f-done{fill:var(--ob-done,var(--c-done))}.s-done{stroke:var(--ob-done,var(--c-done))}text{font-family:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif;fill:var(--ob-ink,var(--c-ink));white-space:pre}.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}.b{font-weight:700}.m{fill:var(--ob-muted,var(--c-muted))}</style>
+<defs><marker id="ob-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" class="f-muted"/></marker></defs>
+<rect x="8" y="34" width="120" height="96" rx="8" class="f-subtle s-border" stroke-width="1"/>
+<text x="68" y="24" font-size="14" class="mono b f-todo" text-anchor="middle">todo</text>
+<rect x="16" y="50" width="104" height="60" rx="6" class="f-surface s-border" stroke-width="1"/>
+<rect x="16" y="50" width="5" height="60" rx="2" class="f-todo"/>
+<text x="30" y="74" font-size="14" class="mono b">2.3.4</text>
+<text x="30" y="96" font-size="13" class="m">ob move</text>
+<rect x="140" y="34" width="120" height="96" rx="8" class="f-subtle s-border" stroke-width="1"/>
+<text x="200" y="24" font-size="14" class="mono b f-doing" text-anchor="middle">doing</text>
+<rect x="148" y="50" width="104" height="60" rx="6" class="f-surface s-border" stroke-width="1"/>
+<rect x="148" y="50" width="5" height="60" rx="2" class="f-doing"/>
+<text x="162" y="74" font-size="14" class="mono b">2.3.4</text>
+<text x="162" y="96" font-size="13" class="m">ob move</text>
+<rect x="272" y="34" width="120" height="96" rx="8" class="f-subtle s-border" stroke-width="1"/>
+<text x="332" y="24" font-size="14" class="mono b f-done" text-anchor="middle">done</text>
+<rect x="280" y="50" width="104" height="60" rx="6" class="f-surface s-border" stroke-width="1"/>
+<rect x="280" y="50" width="5" height="60" rx="2" class="f-done"/>
+<text x="294" y="74" font-size="14" class="mono b">2.3.4</text>
+<text x="294" y="96" font-size="13" class="m">ob move</text>
+<path d="M72 146 Q134.0 174 196 146" fill="none" class="s-muted" stroke-width="1.5" marker-end="url(#ob-arrow)"/>
+<text x="134.0" y="186" font-size="13" class="mono" text-anchor="middle">git mv</text>
+<path d="M204 146 Q266.0 174 328 146" fill="none" class="s-muted" stroke-width="1.5" marker-end="url(#ob-arrow)"/>
+<text x="266.0" y="186" font-size="13" class="mono" text-anchor="middle">git mv</text>
+<text x="200" y="220" font-size="13" class="m" text-anchor="middle">Same file, new folder: git keeps its history.</text>
+</svg>

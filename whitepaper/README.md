@@ -13,6 +13,9 @@ reasoning, and the tools built for it. One Markdown file per section, in order:
 holds every source the paper cites, as `[@key]`. A section not written yet is a heading and a
 TODO line saying what goes there.
 
+`figures/` holds the diagrams the paper embeds, copied from backlog-art's `diagrams/` by
+`script/sync-art.sh`; change them there, never here.
+
 The paper is rendered to the site and built to a PDF with Pandoc and Typst; the build arrives in
 its own change. To read it today, any Markdown viewer works, file by file.
 
