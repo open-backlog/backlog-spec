@@ -42,6 +42,13 @@ then a commit.
 The tools that implement the convention (the `ob` command line and the local board) live
 in their own repositories. The site is https://openbacklog.org.
 
+## Publishing to openbacklog.org
+
+The site (`backlog-ui`, beside this repo) renders `spec/README.md` and serves `schema/`. To hand
+it a change, run `php script/buildmerge-ui.php` here; it replaces `backlog-ui/src/content/backlog-spec/`.
+Uncommitted changes can be tried in backlog-ui's `ng serve`, but only committed ones can be
+deployed. backlog-ui's README has the rest.
+
 ## License
 
 - The specification and the whitepaper (`spec/`, `whitepaper/`) and every other piece of
