@@ -1,6 +1,6 @@
 # Open Backlog
 
-Open Backlog is an open convention for keeping an agile backlog as plain Markdown files in
+Open Backlog is an open convention for keeping a backlog as plain Markdown files in
 a git repository. Each epic, feature and story is a file with a little YAML at the top; a
 story's status is the folder it sits in; and moving it is a `git mv`, so git history is the
 audit trail. There is no server, account or API: people and AI agents read and change the

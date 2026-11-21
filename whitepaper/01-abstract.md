@@ -1,6 +1,6 @@
 # Abstract
 
-Open Backlog keeps an agile backlog as Markdown files in the git repository of the work it plans.
+Open Backlog keeps a backlog as Markdown files in the git repository of the work it plans.
 Each epic, feature and story is a file. A story's status is the folder it is in, so starting or
 finishing work is a `git mv`, and git history records who did what, and when. There is no server,
 account or API: people and AI agents read and change the backlog with a text editor and git. The

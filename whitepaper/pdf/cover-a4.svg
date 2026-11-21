@@ -6,7 +6,7 @@
 <rect x="54" y="308" width="48" height="4" fill="#b45309"/>
 <text x="54" y="224" font-family="'IBM Plex Mono', monospace" font-size="11" font-weight="700" fill="#b45309" letter-spacing="2.5">WHITEPAPER</text>
 <text x="54" y="280" font-family="'IBM Plex Sans', sans-serif" font-size="56" font-weight="700" fill="#1f2328" letter-spacing="-1.5">Open Backlog</text>
-<text x="54" y="356" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="400" fill="#59636e">An agile backlog as</text>
+<text x="54" y="356" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="400" fill="#59636e">A backlog as</text>
 <text x="54" y="388" font-family="'IBM Plex Sans', sans-serif" font-size="24" font-weight="400" fill="#59636e">Markdown files in git</text>
 <text x="54" y="747.89" font-family="'IBM Plex Sans', sans-serif" font-size="14" font-weight="700" fill="#1f2328">Brandon Castagna</text>
 <text x="54" y="767.89" font-family="'IBM Plex Mono', monospace" font-size="11" font-weight="400" fill="#59636e">Version {{version}} · {{date}}</text>
