@@ -52,8 +52,10 @@ version changes. Nothing derives them from a tag. The build uses them for the fi
 and the notice page.
 
 The PDF is built here, on your machine, and published with the site: `script/buildmerge-ui.php`
-runs `script/build-pdf.sh` and copies the PDFs into backlog-ui (2.1.13). There is no CI build. A
-broken whitepaper fails `script/build-pdf.sh` with the error, so it never reaches the site.
+runs `script/build-pdf.sh` and copies the PDFs into backlog-ui, and in the same run renders the
+numbered sections to HTML with Pandoc for the site's `/whitepaper` pages (2.1.13). So the pages
+and the PDF always come from the same files. There is no CI build. A broken whitepaper fails
+`script/build-pdf.sh` with the error, so it never reaches the site.
 
 The normative rules are in [spec/](../spec/); where the paper and the spec differ, the spec wins.
 Licensed [CC-BY-4.0](../LICENSE).

@@ -43,8 +43,8 @@ The `ob` command line and the local board live in their own repositories.
 
 ## Publishing to openbacklog.org
 
-`php script/buildmerge-ui.php` hands the spec and schema to the site's source, `backlog-ui`
-(beside this repo). Uncommitted changes can be tried in its `ng serve`; only committed ones
+`php script/buildmerge-ui.php` hands the spec, schema, examples and whitepaper (its pages and
+PDFs) to the site's source, `backlog-ui` (beside this repo). Uncommitted changes can be tried in its `ng serve`; only committed ones
 can be deployed. backlog-ui's README has the rest.
 
 ## License
