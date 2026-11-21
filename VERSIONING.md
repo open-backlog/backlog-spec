@@ -12,8 +12,9 @@ Before 1.0, a minor version may break (0.1 → 0.2), and CHANGELOG.md marks each
 change with how to update a backlog. From 1.0, only a major version breaks.
 
 **A release is a tag**, `spec-v<version>` on `main`, such as `spec-v0.1.0`; the text between
-tags is a draft. Each release has a GitHub release with the whitepaper PDF, and its JSON
-Schema at `https://openbacklog.org/schema/<major.minor>/`, which never changes after release.
+tags is a draft. Each release has its whitepaper PDF on openbacklog.org (version set by hand in
+`whitepaper/metadata.yml`), and its JSON Schema at
+`https://openbacklog.org/schema/<major.minor>/`, which never changes after release.
 A backlog says which version it follows with `spec:` in `config.yml`.
 
 **1.0** comes when the spec has been used on real backlogs for 3 to 6 months without needing a

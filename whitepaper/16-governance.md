@@ -20,7 +20,7 @@ goal once others use the convention.
 | Wording, examples or fixes that change no rule | PATCH |
 
 Before 1.0, a minor version may break, and the changelog says how to update. A release is a tag,
-such as `spec-v0.1.0`, with the whitepaper PDF and a JSON Schema at
+such as `spec-v0.1.0`, with the whitepaper PDF on openbacklog.org and a JSON Schema at
 `https://openbacklog.org/schema/<major.minor>/` that never changes. A backlog names its version
 with `spec:` in `config.yml`.
 

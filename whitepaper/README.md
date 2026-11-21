@@ -45,5 +45,15 @@ The build reads only this folder: the numbered sections, `metadata.yml`, `refere
 Everything in `pdf/` except the template and the filter comes from backlog-art through
 `script/sync-art.sh`. To read the paper without building it, any Markdown viewer works, file by file.
 
+### Version and publishing
+
+`version` and `date` in `metadata.yml` are set by hand, and changed by hand when the paper's
+version changes. Nothing derives them from a tag. The build uses them for the file name, the cover
+and the notice page.
+
+The PDF is built here, on your machine, and published with the site: `script/buildmerge-ui.php`
+runs `script/build-pdf.sh` and copies the PDFs into backlog-ui (2.1.13). There is no CI build. A
+broken whitepaper fails `script/build-pdf.sh` with the error, so it never reaches the site.
+
 The normative rules are in [spec/](../spec/); where the paper and the spec differ, the spec wins.
 Licensed [CC-BY-4.0](../LICENSE).
