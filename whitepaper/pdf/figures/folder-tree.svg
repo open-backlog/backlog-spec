@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 296" role="img" aria-labelledby="folder-tree-t folder-tree-d">
+<title id="folder-tree-t">An Open Backlog folder tree</title>
+<desc id="folder-tree-d">backlog/ holds config.yml, epics/, features/ and stories/; stories/ has the folders todo/, doing/ and done/, and the folder a story file is in is its status.</desc>
+<style>.f-surface{fill:#ffffff}.s-surface{stroke:#ffffff}.f-subtle{fill:#f6f8fa}.s-subtle{stroke:#f6f8fa}.f-border{fill:#d0d7de}.s-border{stroke:#d0d7de}.f-ink{fill:#1f2328}.s-ink{stroke:#1f2328}.f-muted{fill:#59636e}.s-muted{stroke:#59636e}.f-brand{fill:#b45309}.s-brand{stroke:#b45309}.f-todo{fill:#59636e}.s-todo{stroke:#59636e}.f-doing{fill:#0a3069}.s-doing{stroke:#0a3069}.f-done{fill:#1a7f37}.s-done{stroke:#1a7f37}text{font-family:'IBM Plex Sans',sans-serif;fill:#1f2328;white-space:pre}.mono{font-family:'IBM Plex Mono',monospace}.b{font-weight:700}.m{fill:#59636e}</style>
+<text x="16" y="34" font-size="14" class="mono" xml:space="preserve"><tspan class="m"></tspan><tspan class="b">backlog/</tspan></text>
+<text x="16" y="58" font-size="14" class="mono" xml:space="preserve"><tspan class="m">├─ </tspan><tspan class="">config.yml</tspan></text>
+<text x="384" y="58" font-size="12" class="m" text-anchor="end">spec, name</text>
+<text x="16" y="82" font-size="14" class="mono" xml:space="preserve"><tspan class="m">├─ </tspan><tspan class="">epics/</tspan></text>
+<text x="16" y="106" font-size="14" class="mono" xml:space="preserve"><tspan class="m">│  └─ </tspan><tspan class="">2-build.md</tspan></text>
+<text x="384" y="106" font-size="12" class="m" text-anchor="end">epic</text>
+<text x="16" y="130" font-size="14" class="mono" xml:space="preserve"><tspan class="m">├─ </tspan><tspan class="">features/</tspan></text>
+<text x="16" y="154" font-size="14" class="mono" xml:space="preserve"><tspan class="m">│  └─ </tspan><tspan class="">2.3-cli.md</tspan></text>
+<text x="384" y="154" font-size="12" class="m" text-anchor="end">feature</text>
+<text x="16" y="178" font-size="14" class="mono" xml:space="preserve"><tspan class="m">└─ </tspan><tspan class="">stories/</tspan></text>
+<text x="16" y="202" font-size="14" class="mono" xml:space="preserve"><tspan class="m">   ├─ </tspan><tspan class="f-todo b">todo/</tspan></text>
+<text x="150" y="202" font-size="13" class="mono">2.3.5-ob-list.md</text>
+<text x="16" y="226" font-size="14" class="mono" xml:space="preserve"><tspan class="m">   ├─ </tspan><tspan class="f-doing b">doing/</tspan></text>
+<text x="150" y="226" font-size="13" class="mono">2.3.4-ob-move.md</text>
+<text x="16" y="250" font-size="14" class="mono" xml:space="preserve"><tspan class="m">   └─ </tspan><tspan class="f-done b">done/</tspan></text>
+<text x="150" y="250" font-size="13" class="mono">2.3.3-ob-validate.md</text>
+<text x="16" y="284" font-size="13" class="m">The folder a story is in is its status.</text>
+</svg>
