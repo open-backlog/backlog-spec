@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "test": "node schema/test/check-examples.mjs && node schema/test/check-whitepaper.mjs"
+    "test": "node schema/test/check-examples.mjs && node schema/test/check-whitepaper.mjs && node schema/test/check-frozen.mjs"
   },
   "devDependencies": {
     "ajv": "^8.17.1",

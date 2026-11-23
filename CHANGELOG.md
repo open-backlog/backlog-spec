@@ -3,9 +3,12 @@
 Every change to a rule in `spec/`, newest first. A **breaking** change makes a valid backlog
 invalid or changes what it means ([VERSIONING.md](VERSIONING.md)).
 
-## Unreleased (0.1, draft)
+## 0.1.0 (2026-11-23)
 
-The first draft of the rules: items and their parents, IDs, files and fields, folders and
+The first release, tagged `spec-v0.1.0`. Its JSON Schema, `schema/0.1/`, is frozen at
+https://openbacklog.org/schema/0.1/.
+
+The rules: items and their parents, IDs, files and fields, folders and
 status, configuration and the four tiers, and the rules for tools. Twenty rules, with an
 example of each broken in `examples/invalid/`, a JSON Schema in `schema/`, and the site at
 https://openbacklog.org/spec.

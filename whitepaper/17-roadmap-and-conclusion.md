@@ -2,15 +2,14 @@
 
 ## Roadmap
 
-The first release is being built in the open, story by story, in the backlog this paper
-describes.
+The first release was built in the open, story by story, in the backlog this paper describes.
 
-- **Done:** the specification draft, its examples and JSON Schema; openbacklog.org with the
-  specification, the examples, a file checker and a story maker; this paper and its PDF; the core
-  and `ob` on npm (`open-backlog` 0.3, with `ob comment`, `ob serve` and `ob init --hook`); the
-  board (`open-backlog-board` 0.3); and this project's backlog checked by those tools.
-- **In progress:** the repositories made public and the specification released as
-  `spec-v0.1.0`.
+- **Done:** the specification, released as `spec-v0.1.0` with its examples and frozen JSON
+  Schema; openbacklog.org with the specification, the examples, a file checker and a story
+  maker; this paper and its PDF; the core and `ob` on npm (`open-backlog` 0.3, with
+  `ob comment`, `ob serve` and `ob init --hook`); the board (`open-backlog-board` 0.3); this
+  project's backlog checked by those tools; and the specification, the CLI and the board public
+  in the `open-backlog` organization on GitHub.
 
 **Candidates after that**, none a commitment: `ob sprint` and sprint filters on the board;
 reading across repositories and backlogs in the tools; `ob report` (section 11); a hosted board;

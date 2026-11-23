@@ -8,7 +8,8 @@ any Open Backlog tool, and for autocomplete and inline errors in an editor.
 | [0.1/item.schema.json](0.1/item.schema.json) | the front matter of a capability, epic, feature or story-level file | `https://openbacklog.org/schema/0.1/item.schema.json` |
 | [0.1/config.schema.json](0.1/config.schema.json) | `config.yml` | `https://openbacklog.org/schema/0.1/config.schema.json` |
 
-They are JSON Schema draft-07, which editors support best, and never change after release.
+They are JSON Schema draft-07, which editors support best, and never change after release:
+`schema/0.1.sha256` holds the released files' hashes, and `npm test` fails if they change.
 
 ## What it checks
 
@@ -81,4 +82,4 @@ or a `status:` field ("Must NOT be valid"). The same check runs in a terminal or
 ## Tests
 
 `npm test`, run by CI on every push, checks every file in [examples/](../examples/) against the
-schema and fails if they disagree.
+schema and fails if they disagree, and fails if a released version's files change.

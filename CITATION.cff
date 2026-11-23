@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you refer to the Open Backlog specification, please cite this version."
+type: standard
+title: "Open Backlog: a backlog as Markdown files in git"
+version: 0.1.0
+date-released: 2026-11-23
+authors:
+  - family-names: Castagna
+    given-names: Brandon
+license: CC-BY-4.0
+url: "https://openbacklog.org/spec"
+repository-code: "https://github.com/open-backlog/backlog-spec"
+keywords:
+  - backlog
+  - agile
+  - markdown
+  - git
+  - specification

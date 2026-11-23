@@ -1,6 +1,6 @@
 # Open Backlog specification
 
-**Version 0.1, draft.** Nothing here is released yet; see [VERSIONING.md](../VERSIONING.md).
+**Version 0.1.0**, released 2026-11-23 as `spec-v0.1.0`; see [VERSIONING.md](../VERSIONING.md).
 
 An Open Backlog is a folder of Markdown files in a git repository. Each file is one *item*: a
 capability, an epic, a feature, or a piece of work such as a story. A story's status is the

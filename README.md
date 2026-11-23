@@ -27,8 +27,11 @@ then a commit.
 
 ## Status
 
-**Draft.** Spec 0.1 is being written; nothing is released yet ([VERSIONING.md](VERSIONING.md)).
-Read it at [spec/](spec/) or https://openbacklog.org/spec.
+**0.1.0, released 2026-11-23** as the tag `spec-v0.1.0`
+([release](https://github.com/open-backlog/backlog-spec/releases/tag/spec-v0.1.0),
+[VERSIONING.md](VERSIONING.md)). Read it at [spec/](spec/) or https://openbacklog.org/spec; the
+whitepaper's PDF is at https://openbacklog.org/whitepaper. To cite it, use
+[CITATION.cff](CITATION.cff) (GitHub's "Cite this repository").
 
 ## What's in this repository
 
