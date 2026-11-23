@@ -1,7 +1,7 @@
 # The reference implementation
 
-**Designed, not yet built.** This section describes the tools as designed. The specification, not
-the tools, defines a valid backlog.
+**Built:** `open-backlog` 0.3 and `open-backlog-board` 0.3 on npm. The specification, not the
+tools, defines a valid backlog.
 
 | Part | npm package | What it is |
 |---|---|---|
@@ -10,8 +10,8 @@ the tools, defines a valid backlog.
 | Board | `open-backlog-board` | a local web board, started by `ob serve`, on the same core |
 
 All are TypeScript on Node and MIT-licensed. The board uses the published core, so the command
-line and the board cannot disagree about the rules. `npm i -g open-backlog` installs both; the
-board is fetched the first time `ob serve` runs.
+line and the board cannot disagree about the rules. `npm i -g open-backlog` is the one install:
+`ob serve` runs the board of the same version line, fetched with `npx` the first time.
 
 ## The core
 
@@ -31,22 +31,22 @@ The specification's example backlogs are the core's tests: each valid one must p
 
 **Your own git.** The tools run the installed `git`, never a library or a server. They get the
 user's identity, SSH keys, credential helper and hooks for free, and need no account or API key.
-Each change is one commit of only the files it touched. Moves, comments and the board take
-`--no-commit` to leave committing to the user.
+Each change is one commit of only the files it touched. `ob` commands take `--no-commit` to
+leave committing to the user.
 
 ## `ob`
 
 | Command | What it does | npm |
 |---|---|---|
-| `ob init` | creates `config.yml` and the folders | 0.1.0 |
-| `ob new <type> "Title" --parent <id>` | creates the next numbered item; a bug with no parent goes to this month's feature in epic `0` | 0.1.0 |
-| `ob validate` | reports errors and warnings; `--fix` renumbers duplicate IDs; works in CI and as a pre-commit hook | 0.1.0 |
+| `ob init` | creates `config.yml` and the folders; `--hook` installs a pre-commit hook that runs `ob validate` | 0.1.0, `--hook` 0.3.2 |
+| `ob new <type> "Title" --parent <id>` | creates the next numbered item; a bug with no parent goes to this month's feature in epic `0`; `--repo` names its repository | 0.1.0, `--repo` 0.3.1 |
+| `ob validate` | reports errors and warnings; `--fix` renumbers duplicate IDs; works in CI and before every commit | 0.1.0 |
 | `ob move`, `ob start`, `ob done` | `git mv` plus a commit; files by month when configured | 0.1.0 |
 | `ob list`, `ob show`, `ob tree` | items in build order; one item; the plan with progress | 0.1.0 |
 | `ob comment <id> "text"` | adds a dated comment under the handle from git config | 0.2.0 |
 | `ob serve` | starts the board | 0.3.0 |
 
-Each command's result is to be identical to doing the same thing by hand.
+Each command's result is identical to doing the same thing by hand.
 
 ## The board
 

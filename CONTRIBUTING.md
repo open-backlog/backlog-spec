@@ -2,8 +2,8 @@
 
 The convention is meant to stay small, so most of the work is deciding what not to add.
 
-1. **Open an issue** saying what you want to change and why, labelled **spec change** (a
-   rule), **bug** (a mistake or broken example) or **idea** (anything else). Wording and
+1. **Open an issue** saying what you want to change and why, from its template: **spec
+   change** (a rule), **bug** (a mistake or broken example) or **idea** (anything else). Wording and
    edge cases are settled there. Typo fixes can skip this step.
 2. **Open a pull request** that links the issue and makes that one change.
 
@@ -18,3 +18,5 @@ backlog. Its pull request also:
 
 Contributions are licensed like the files they change: prose under [CC-BY-4.0](LICENSE),
 code, schema and examples under [MIT](LICENSE-CODE).
+
+Everyone taking part follows the [code of conduct](CODE_OF_CONDUCT.md).

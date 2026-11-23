@@ -24,8 +24,8 @@
  * Run it whenever the site should see a spec or whitepaper change: then `npx ng serve` in
  * backlog-ui shows it at http://localhost:4200/spec and /whitepaper. Nothing reaches
  * backlog-web or the live site until backlog-ui's own `php script/buildmerge-web.php`, which
- * refuses a copy taken from uncommitted changes here (marked "+dirty"). So: try drafts freely,
- * commit before deploying. whitepaper/drafts/ never counts as a change.
+ * refuses a copy taken from uncommitted changes here (marked "+dirty"). So: try changes freely,
+ * commit before deploying.
  */
 
 $specRoot = realpath(__DIR__ . '/..');
@@ -36,7 +36,7 @@ if (!$ui) fail("no backlog-ui beside backlog-spec");
 
 $git = 'git -C ' . escapeshellarg($specRoot);
 $commit = trim((string)shell_exec("$git rev-parse --short HEAD 2>/dev/null")) ?: 'unknown';
-$dirty = trim((string)shell_exec("$git status --porcelain -- spec schema examples whitepaper script/build-pdf.sh ':!whitepaper/drafts' 2>/dev/null")) !== '';
+$dirty = trim((string)shell_exec("$git status --porcelain -- spec schema examples whitepaper script/build-pdf.sh 2>/dev/null")) !== '';
 $source = $commit . ($dirty ? '+dirty' : '');
 
 // The whitepaper first: if the PDF or the HTML fails, nothing in backlog-ui has changed yet.

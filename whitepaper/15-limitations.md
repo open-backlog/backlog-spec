@@ -18,5 +18,5 @@ Open Backlog is small on purpose, and that costs something:
   (sections 7 and 9).
 - **Attachments are not part of the format.** Images and logs can live in the repository, but make
   it larger forever.
-- **It is new:** a 0.x draft that may break before 1.0, tools not yet built, one real backlog, and
-  one maintainer (section 16).
+- **It is new:** a 0.x draft that may break before 1.0, young tools, one real backlog, and one
+  maintainer (section 16).

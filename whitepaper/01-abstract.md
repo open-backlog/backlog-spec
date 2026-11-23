@@ -5,7 +5,7 @@ Each epic, feature and story is a file. A story's status is the folder it is in,
 finishing work is a `git mv`, and git history records who did what, and when. There is no server,
 account or API: people and AI agents read and change the backlog with a text editor and git. The
 same files scale from one repository to a portfolio by adding configuration. This paper explains
-why, sets out the convention, and describes the optional tools designed for it.
+why, sets out the convention, and describes the optional tools built for it.
 
 # Executive summary
 

@@ -38,6 +38,6 @@ Reports are only as good as the commits. A move is dated when it is committed, s
 commits late gets wrong cycle times. This project often committed the start and finish of a
 story together, so its lead times are reliable and its cycle times are not.
 
-As designed, the first release of `ob` shows progress (`ob tree`) and recent work (`ob list`).
+The first release of `ob` shows progress (`ob tree`) and recent work (`ob list`).
 An `ob report` command is a candidate for later (section 17). Every report above already works
 with git alone.

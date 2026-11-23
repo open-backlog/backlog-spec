@@ -14,8 +14,6 @@ holds every source the paper cites, as `[@key]`; they are listed in appendix D. 
 is written (2.1.1–2.1.8). Appendix B copies the JSON Schema in full, and `npm test` fails if
 that copy ever differs from `schema/0.1/`.
 
-`drafts/` keeps earlier versions of the paper with a decision log; nothing there is published.
-
 `figures/` holds the diagrams the paper embeds, copied from backlog-art's `diagrams/` by
 `script/sync-art.sh`; change them there, never here.
 
@@ -32,7 +30,7 @@ Pandoc turns the numbered sections into Typst, with citations from
 `references.bib`, and Typst typesets them: cover, license notice, contents, then the paper, with
 running headers, page numbers and references. Two builds of the same files give the same PDF.
 The build reads only this folder: the numbered sections, `metadata.yml`, `references.bib` and
-`pdf/`. It never reads `drafts/` and never fetches anything.
+`pdf/`. It never fetches anything.
 
 | `pdf/` | |
 |---|---|

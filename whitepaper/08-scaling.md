@@ -41,19 +41,21 @@ The configuration lists the repositories, and an item may name the one it change
 `repo: shop-web` or a list, `repo: [shop-api, shop-web]`. The example `t3-application` is a shop
 in three repositories.
 
-**Open Backlog itself is T3.** Its backlog lives in its own repository and plans eleven:
+**Open Backlog itself is T3.** Its backlog lives in its own repository and plans eleven, three of
+them public:
 
 ```yaml
 spec: 0.1
 name: open-backlog
 done-folders: month
 repos:
-  backlog-spec: git@github.com:brandon-castagna/backlog-spec.git
-  backlog-cli: git@github.com:brandon-castagna/backlog-cli.git
-  backlog-board: git@github.com:brandon-castagna/backlog-board.git
+  backlog-spec: git@github.com:open-backlog/backlog-spec.git
+  backlog-cli: git@github.com:open-backlog/backlog-cli.git
+  backlog-board: git@github.com:open-backlog/backlog-board.git
+  # and eight private ones: the plans, the art, the site and its secrets, hosting and DNS
 ```
 
-70 of its 74 stories name one repository; four name two or three. Because `repo` is optional,
+72 of its 76 stories name one repository; four name two or three. Because `repo` is optional,
 moving from T2 to T3 changes only the configuration.
 
 ## T4: a portfolio

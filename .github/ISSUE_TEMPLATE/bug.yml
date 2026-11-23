@@ -1,0 +1,23 @@
+name: Bug
+description: A mistake in the spec or whitepaper, a broken example, or a schema that disagrees with the rules.
+labels: ["bug"]
+body:
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: The file, section or example, with a link if you have one.
+      placeholder: spec/README.md, section 4, or examples/t3-application
+    validations:
+      required: true
+  - type: textarea
+    id: wrong
+    attributes:
+      label: What is wrong
+      description: What it says or does, and what you expected instead.
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        A bug in the `ob` command line or the board belongs in its own repository.

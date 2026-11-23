@@ -1,0 +1,38 @@
+name: Spec change
+description: Propose adding, changing or removing a rule in the specification.
+labels: ["spec change"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The convention is meant to stay small, so most of the work is deciding what not to add
+        ([CONTRIBUTING.md](https://github.com/open-backlog/backlog-spec/blob/main/CONTRIBUTING.md)).
+        Settle the wording here first; a pull request comes after.
+  - type: input
+    id: rule
+    attributes:
+      label: Rule or section
+      description: The rule name in brackets, or the section, such as [id-unique] or "5 The body".
+      placeholder: "[id-unique]"
+  - type: textarea
+    id: problem
+    attributes:
+      label: The problem
+      description: What happens today with a real backlog, and why it's a problem.
+    validations:
+      required: true
+  - type: textarea
+    id: change
+    attributes:
+      label: The change
+      description: The rule as you would write it. Does it still work with only a text editor and git?
+    validations:
+      required: true
+  - type: dropdown
+    id: breaking
+    attributes:
+      label: Breaking?
+      description: Would a backlog that is valid today become invalid?
+      options: ["No", "Yes", "Not sure"]
+    validations:
+      required: true

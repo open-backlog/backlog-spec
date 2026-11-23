@@ -56,5 +56,6 @@ can be deployed. backlog-ui's README has the rest.
 
 ## Contributing
 
-Open an issue, then a pull request: [CONTRIBUTING.md](CONTRIBUTING.md). Every rule change is
-in [CHANGELOG.md](CHANGELOG.md).
+Open an issue (spec change, bug or idea), then a pull request: [CONTRIBUTING.md](CONTRIBUTING.md).
+Every rule change is in [CHANGELOG.md](CHANGELOG.md). Everyone taking part follows the
+[code of conduct](CODE_OF_CONDUCT.md).

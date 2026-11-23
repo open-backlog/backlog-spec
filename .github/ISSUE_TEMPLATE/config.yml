@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the spec
+    url: https://openbacklog.org/spec
+    about: The rules, with examples, before proposing a change.

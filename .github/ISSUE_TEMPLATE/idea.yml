@@ -1,0 +1,11 @@
+name: Idea
+description: "Anything else: a question, a use case, a tool, a better explanation."
+labels: ["idea"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: The idea
+      description: What you would like and why. A real backlog it came from helps.
+    validations:
+      required: true
